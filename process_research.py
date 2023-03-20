@@ -7,7 +7,6 @@ from langchain import PromptBuilder
 
 # Get the names of the research files
 def get_pdf_filenames(folder_path):
-    all_files = os.listdir(folder_path)
     pdf_pattern = os.path.join(os.getcwd(folder_path), '*.pdf')
     pdf_filepaths = [file for file in glob.glob(pdf_pattern, recursive=True)]
     return pdf_filepaths
@@ -45,7 +44,9 @@ def summarize_paper(paper_content):
     pb = PromptBuilder()
     
     pb.add_question("What is the main objective of this research paper?")
+    pb.add_instruction("Develop an appropriate in-line citation for this research paper:")
     pb.add_instruction("Summarize the following research paper in 2-3 sentences:")
+    pb.add_instruction("Produce five points that capture the main arguments and insights of this paper")
     pb.add_data(paper_content)
     
     prompt = pb.compile_prompt()
@@ -68,7 +69,7 @@ def generate_research_output(summaries):
     pb = PromptBuilder()
     
     pb.add_question("Based on these summaries, what new research insights can be derived?")
-    pb.add_instruction("Create new research output that is coherent and properly cited:")
+    pb.add_instruction("Write as abstract for a scientific paper on the applications of Large Language models in Irrigation scheduling:")
     pb.add_data("\n".join(summaries))
     
     prompt = pb.compile_prompt()

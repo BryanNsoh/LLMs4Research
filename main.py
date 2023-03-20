@@ -1,11 +1,9 @@
 import openai
-import PyPDF2
-import os
 import process_research as research
 import datetime
 
 # Set your OpenAI API key
-openai.api_key = "your_openai_api_key_here"
+openai.api_key = "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"
 
 folder_path = "./research_files"
 pdf_filenames = research.get_pdf_filenames(folder_path)
