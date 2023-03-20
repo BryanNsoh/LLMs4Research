@@ -1,0 +1,1764 @@
+Computers and Electronics in Agriculture 113 (2015) 154–163
+
+Contents lists available at ScienceDirect
+
+Computers and Electronics in Agriculture
+journal homepage: www.elsevier.com/locate/compag
+
+Energy efﬁcient automated control of irrigation in agriculture by using
+wireless sensor networks
+Stefanos A. Nikolidakis a,⇑, Dionisis Kandris b, Dimitrios D. Vergados a, Christos Douligeris a
+a
+b
+
+Department of Informatics, University of Piraeus, Piraeus, Greece
+Department of Electronic Engineering, Technological Educational Institute (TEI) of Athens, Athens, Greece
+
+a r t i c l e
+
+i n f o
+
+Article history:
+Received 17 December 2013
+Received in revised form 6 February 2015
+Accepted 9 February 2015
+Available online 5 March 2015
+Keywords:
+Agriculture
+Irrigation
+WSNs
+Energy Efﬁciency
+
+a b s t r a c t
+Many agricultural activities can be highly enhanced by using digital technologies. One of these activities
+is the regulation of the quantity of water in cultivated ﬁelds, a process which is directly interwoven with
+the sustainability and the productivity of crops, since insufﬁcient or excessive irrigation may not only be
+obstructive, but also destructive. This paper proposes a scheme based on the collaboration of an integrated system for automated irrigation management with an advanced novel routing protocol for Wireless
+Sensor Networks (WSNs), named ECHERP (Equalized Cluster Head Election Routing Protocol). At its core,
+the proposed system aims at efﬁciently managing water supply in cultivated ﬁelds in an automated way.
+The system takes into consideration the historical data and the change on the climate values to calculate
+the quantity of water that is needed for irrigation. In case that the change on the collected values is above
+a threshold more frequent data collection is proposed to minimize the necessary quantity of water. On
+the other hand, in case that the change of the values is below a preset threshold then the time interval
+to collect data can increase to save sensor energy, leading to a prolonged sensor lifetime. The results show
+that network lifetime using ECHERP is improved up to 1825 min and if a round is 110 s the model provides energy efﬁciency using smaller water quantities.
+Ó 2015 Elsevier B.V. All rights reserved.
+
+1. Introduction
+Agriculture plays a vital role in the economy and, in many cases,
+in the survival of nations, since it provides the basic subsistence for
+the entire population of a country while at the same time it
+interacts with several other industries. Especially in rural areas,
+inhabitants depend on agriculture as it is critical not only for their
+nutrition but it also constitutes the base of all trade. Moreover, the
+ever increasing world population demands larger amounts of
+food which subsequently presupposes a well-managed and
+cost-effective agriculture.
+Throughout the world, irrigation is one of the main water consumers. Almost 60 percent of all the world water, taken from rivers, lakes, reservoirs, and wells, is used for the irrigation of.
+Without irrigation, crops would never have been grown in the
+deserts of California and Israel. Irrigation has been around for as
+long as humans have been cultivating plants. Even though the traditional way of pouring water on ﬁelds is still a common irrigation
+method, other more efﬁcient and mechanized, methods are also
+⇑ Corresponding author. Tel.: +30 210 4142127; fax: +30 2104142458.
+E-mail addresses: snikol@unipi.gr (S.A. Nikolidakis), dkandris@teiath.gr
+(D. Kandris), vergados@unipi.gr (D.D. Vergados), cdoulig@unipi.gr (C. Douligeris).
+http://dx.doi.org/10.1016/j.compag.2015.02.004
+0168-1699/Ó 2015 Elsevier B.V. All rights reserved.
+
+used. One of the more popular mechanized methods is the centre-pivot irrigation system, which uses moving spray guns or dripping faucet heads on wheeled tubes that pivot around a central
+source of water. There are many irrigation techniques farmers
+use today, since there is always a need to ﬁnd more efﬁcient ways
+to use water for irrigation. Producers need to ﬁnd more effective
+and efﬁcient use of water resources while maintaining high crop
+yields. Some efforts to more efﬁciently utilize water for crop production are examined, Producers has to ﬁnd more effective and
+efﬁcient use of water resources while maintaining high crop yields.
+While the producers have to apply water to meet the needs of
+the crop, they must realize that with traditional management practices, yields and returns from the irrigated crop will be reduced as
+compared to a fully irrigated crop. Moreover, to properly manage
+the water for the greatest return, producers must have an understanding of how crops respond to water, how crop rotations can
+enhance irrigation management, and how changes in agronomic
+practices can inﬂuence the water needs.
+Water stress during critical times may result in low yields.
+Crops, such as corn, respond with more yields for every inch of
+water that the crop consumes as compared to other crops such
+as winter wheat or soybeans. However, crops, such as corn require
+more water for development or maintenance before any yield is
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+
+produced. Corn requires approximately 10 in. of water to produce
+the ﬁrst increment of yield as compared to 4.5 and 7.5 in. for wheat
+and soybeans respectively.
+The integration of automated procedures in agriculture increases
+the productivity as well as the quality of the products, thus fulﬁlling
+the ever increasing demand for healthy and inexpensive food
+around the world. However, an efﬁcient automated system has to
+describe all the main processes that are involved in the agriculture
+chain. Plant cultivation, which can be considered as the most critical
+process, is affected by many factors such as the temperature, the
+humidity and the topography of the surrounding environment.
+Achieving ideal values for these factors and optimizing their consequences depend on the type of the crops cultivated. Thus, the design
+of an efﬁcient irrigation system should consider these factors to
+achieve a successful and high quality harvest. For example, the process of grape maturation is affected by the photo-synthesis that produces the sugar that is stored in the grapes. In grapes, the balance
+among sugar, acid, pH and potassium is fundamental in determining
+the quality of the produced wine. This balance depends to a large
+extent on the frequency of the irrigation of the cultivated ﬁelds.
+The scientiﬁc discipline of Wireless Sensor Networks (WSNs)
+has reached a point of maturity that it can provide accurate and
+highly effective services to farmers. Thus, WSNs should monitor
+the above described factors to achieve an improved harvest
+(Shu-ming et al., 2009). WSNs are able to rapidly capture process
+and transmit critical data in real time. The real-time data collected
+by sensors located in the cultivated ﬁelds may be used by experts
+or by automated systems to make decisions, such as which irrigation policy should be applied. Additionally, since a WSN does not
+require the deployment of wires, the need for human intervention
+is minimized. For these reasons, it is expected that WSNs will
+become a low cost yet effective approach for the monitoring of
+ﬁelds in the near future.
+Additionally, WSNs can be combined with a system that manages the water applied to each ﬁeld based on the environmental
+conditions and on the feedback sent by the individual sensors.
+There are several advantages in using WSNs and automated decision systems in agriculture:
+ Improved estimation and planning of ﬁeld irrigation based on
+the available water supply.
+ Minimization of the required human resources, time, and effort
+in the agricultural production.
+ Early detection of possible ﬂoods in the ﬁeld that could be
+destructive for the crops and proper pumping of the water to
+mitigate such cases.
+ Better coordination between different working groups, i.e.
+farmers and technical assistants thanks to a clear division of
+responsibilities.
+ Creation of knowledge gathered from the deployed sensor networks for future applications in the agriculture domain.
+All the irrigation models that have been proposed so far do not
+use an agriculture model to calculate the quantity of water for irrigation. Moreover, they use WSNs to collect data from the area
+without considering the routing of data from the sensors to the
+base station, a technique that could provide improved energy efﬁciency. In this paper, we propose a system that takes into consideration the historical data and the change of the climate values
+to calculate the quantity of water that is needed for irrigation. In
+case that the change of the collected values is above a threshold
+more frequent data collection is proposed to be performed to minimize the necessary quantity of water. On the other hand, in case
+that the change of the values is below a preset threshold then
+the time interval to collect the data can increase to save sensor
+energy, leading to a prolonged sensor lifetime.
+
+155
+
+In this paper an integrated architecture, based on the use of
+WSNs, for automated irrigation management is proposed that aims
+to achieve effective and prompt irrigation of parcels with great
+energy efﬁciency due to the utilization of a novel routing protocol.
+The paper is organized as follows. In Section 2, the related work
+is presented. Section 3, describes the structure of the proposed system. Section 4, presents the performance evaluation. In Section 5,
+the paper is concluded and areas of future work are presented.
+2. Related work
+The work in the area of WSNs in agriculture is composed of two
+parts. The ﬁrst part deals with the routing protocol used to minimize the energy consumption in WSNs, while the second part
+addresses the development of irrigation systems in agriculture that
+manage the water used for irrigation.
+2.1. Energy efﬁcient routing algorithms in WSNs
+There exist several proposals to develop protocols that consider
+the energy efﬁciency of sensors in their routing activities. In hierarchical networks, nodes are organized in clusters in which a node
+plays the role of a cluster head. The cluster head is responsible for
+coordinating activities within the cluster and for forwarding information between clusters. Clustering has the potential to reduce
+energy consumption and to extend the lifetime of the network,
+by achieving a high delivery ratio in a scalable manner. In agriculture, the network used may be rather large since it needs to cover
+the entire cultivated ﬁelds. Therefore, the hierarchical protocols
+may be suitable and beneﬁcial for precision agriculture.
+In (Heinzelman et al., 2000) LEACH, a hierarchical protocol in
+which most nodes transmit to cluster heads, is presented. The
+operation of LEACH consists of two phases:
+ The Setup Phase. In the setup phase, the clusters are organized
+and the cluster heads are selected. Each node determines
+whether it will become a cluster head in this round by using a
+stochastic algorithm at each round. If a node becomes a cluster
+head once, it cannot become cluster head again after P rounds,
+where P is the desired percentage of cluster heads.
+ The Steady State Phase. In the steady state phase, the data is sent
+to the base station. The duration of the steady state phase is
+longer than the duration of the setup phase in order to minimize overhead.
+LEACH is a wireless distributed protocol that helps WSNs to use
+less energy. However, LEACH uses single-hop routing where each
+node can transmit directly to the cluster-head and the sink. Therefore, it is not recommended for networks that are deployed in large
+regions.
+PEGASIS is an energy efﬁcient protocol (Lindsey and
+Raghavendra, 2002) using a chain-based protocol and providing
+an improvement over LEACH. In PEGASIS each node communicates
+only with a nearby neighbour in order to send and receive data. It
+also takes turns (cluster head transmit after collecting data from all
+the nodes) transmitting to the base station, thus reducing the
+amount of energy spent per round. The nodes are organized in such
+a way as to form a chain, which can either be accomplished by the
+sensor nodes themselves, using a greedy algorithm starting from a
+certain node, or the Base Station (BS) can compute this chain and
+broadcast it to all the sensor nodes.
+TEEN is a hierarchical protocol designed for sudden changes in
+the sensed attributes, such as sudden drops in temperature due to
+frost (Manjeshwar and Agrawal, 2009). Responsiveness is an
+important attribute of time-critical applications, in which the
+
+156
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+
+network is operated in a reactive mode. The sensor network architecture in TEEN is based on a hierarchical grouping where closer
+nodes form clusters and this process goes to a higher level until
+the sink is reached. Even though TEEN works well in conditions like
+sudden changes in the sensed attributes, in large area networks
+and when the number of layers in the hierarchy is small, TEEN
+tends to consume a lot of energy, because of long distance transmissions. Moreover, when the number of layers increases, the
+transmissions become shorter and the overhead in the setup phase
+as well as in the operation becomes dominant.
+In (Lotf et al., 2008), a routing protocol for self-conﬁguration
+and hierarchal routing, named ELCH, is presented. In this protocol,
+the sensors vote for their neighbours to elect suitable cluster
+heads. It combines the cluster architecture with multi-hop routing
+for the reduction of the total transmission energy.
+The above approaches take into consideration the energy consumption of the sensors in order to extend the lifetime of the network. However, since they are general purpose networks they do
+not take into account the principles, characteristics and requirements of the speciﬁc application that sensor networks are used for.
+All the aforementioned protocols try to minimize the energy
+consumption. However, they differ on the algorithm used. Most
+of these algorithms are based on the selection of the node having
+the higher residual energy in every cluster as the cluster head for
+the next round. Although, this consideration seems to be quite
+rational, there are many cases where its effectiveness is limited.
+For instance, in the cases where the node having the higher energy
+residues is positioned close to the border line of its cluster, signiﬁcant amounts of energy are spent by the cluster nodes in order
+to transmit to their cluster head.
+2.2. Automated irrigation in agriculture
+WSNs have been used for the automated irrigation of parcels
+(Rehman et al., 2011). These applications address the scarcity of
+water problem and the need of proper water management. This
+is achieved by providing water only to places where it is needed,
+while at the same time controlling the quantity of the consumed
+water.
+Various models, systems and methodologies for the irrigation of
+parcels have been developed. In (Diaz et al., 2011) a methodology
+to guide the development of applications for the agricultural
+domain based on WSNs is presented. This methodology divides
+the development of applications in agriculture in steps that gets
+an input, produces an output, and describes the procedures to be
+undertaken by a speciﬁc group of users.
+Speciﬁcally, the purpose of this methodology is to describe the
+life cycle of applications by identifying the responsibilities of the
+individual users. In (Stone et al., 1985), a computer-based monitoring system for continuous measurements of soil water potential is
+proposed and analyzed. This model measures the quantity of water
+during a period. The results are used to decide the quantity of
+water to be used for irrigation.
+Indirect estimates using direct measurements of the soil moisture are discussed in Zazueta and Smajstrla (1992). In this model
+the measurements of time in samples are used to estimate the
+quantity of water that is required for irrigation. Moreover, in
+Meron et al. (1995) a control system for apple tree irrigation management using densitometers is presented. In this model the water
+required for irrigation is measured using a soil sensor-actuated
+automatic irrigation system. Sensor actuation thresholds are optimized for high fruit yield and quality.
+In (Testezlaf et al., 1997) an automated irrigation control system
+for the management of greenhouse container plants is evaluated.
+The system consisted of soil moisture sensors, a hardware input/output interface, a computer with the relevant software and actuators.
+
+An evaluation of the control system is performed considering a
+greenhouse. The results show that the control system is reliable in
+applying water responding to the plant demands. Reliable measurements of the substrate water tension using sensors presented a
+major difﬁculty.
+In (Kim and Evans, 2009) the design of decision support
+software and its integration with an in-ﬁeld WSN to implement
+site-speciﬁc sprinkler irrigation control via Bluetooth wireless
+communications is described. This model consists of machine conversion, localization, and mission planning. The ﬁrst requirement is
+to convert a self-propelled irrigation machine from a conventional
+mechanical and hydraulic system to an electronically controllable
+system for individual sprinkler head control. Then, the geographic
+location of the irrigation machine is continuously monitored by a
+self-positioning system. Once the machine is controllable and
+accessible, mission planning decide the time to irrigate that each
+sprinkler head should apply at each location.
+In (Sudha et al., 2011), a TDMA-based medium access control
+(MAC) protocol is used to collect environmental data such as soil
+moisture and temperature of an irrigation system. The sensors
+are in the idle state and change to the active state to measure
+the temperature and the moisture level of the soil. The base station
+sends requests to nodes to collect the temperature and the moisture level of a particular area. A node responds to this request by
+sending back the present value of the moisture and the temperature of that region. The other nodes remain in the idle state.
+After sending the required data the node goes back to the idle state.
+This process is repeated for all the nodes. In using a direct communication method each sensor node sends its data directly to the
+base station.
+In addition to the above, there also exist some recent attempts to
+develop remote sensing and control systems for irrigation management using WSNs. In (Kim et al., 2008), a remote sensing and control of an irrigation system using a distributed WSN is described.
+The ﬁeld conditions are monitored by sensor stations distributed
+across the ﬁeld based on a soil property map, and they are periodically sampled and wirelessly transmitted to a base station. In
+(Xiaohong et al., 2009), a water-saving irrigation system based on
+fuzzy control technology and WSN is described. The node takes
+the soil moisture error and error change rate as its input and obtains
+the water demand amount of the crops under certain soil moisture
+conditions. In (Dubey et al.., 2011), a WSN based remote irrigation
+control system and automation using dual tone multi frequency
+(DTMF) code is described. The system uses signalling to control
+the water ﬂow for sectored, sprinkler or drip section irrigation. In
+(Zhang et al., 2011), a calibration method for detecting soil water
+content based on information sharing is described. The system is
+an efﬁcacious approach to determine the balance between the
+calibration accuracy of moisture sensor and the investment of agricultural production. All these attempts propose systems that are
+able to provide irrigation services to parcels without considering
+in depth the efﬁcient management of the water used.
+3. Overview of the proposed system
+The proposed system considers climate values, such as humidity,
+temperature and wind to calculate the quantity of water that is
+needed for proper irrigation. Also, when evaluating the climate
+parameters it considers past states and compares them to the current states to make efﬁcient decisions. For example, if the value of
+the temperature in the previous day has decreased then less water
+is required. Based on the collected historical values the quantity
+required might be larger. Thus, water can be conserved in case of
+a high rate of change of these environmental values. The total complexity of the model is 2n + n, where n is the number of nodes in the
+cluster.
+
+157
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+
+The proposed automated irrigation management system, as
+mentioned above, aims at the automatic irrigation of parcels with
+possibly non-uniform composition like the one shown in Fig. 1,
+which comprises of ﬁve neighbouring parcels having different
+crops.
+The proposed automated irrigation management system comprises of two subsystems. The ﬁrst subsystem concerns the WSN
+which collects the data from the cultivated ﬁelds, as shown in
+Fig. 2a. The second subsystem involves the decision making system, the ﬂow chart of which is depicted in Fig. 2b.
+The proposed WSN structure includes a set of sensors that
+monitor the humidity and the temperature of soil, the humidity,
+the temperature and the speed of air, and the duration of sunshine
+hours per day. The individual sensors are placed at appropriate
+locations in the parcels. The collected information is transmitted
+to a base station.
+More speciﬁcally, the sensors at the ﬁeld scan the weather conditions periodically (for example every 10 s). The collected data are
+sent via wireless (for example, a ZigBee radio transmitter) to the
+base computer at the receiver. The sensors are self-powered by a
+battery. A set of sensors is used to measure air humidity and temperature. Also humidity sensors are used to measure soil moisture
+content and wind speed. Moreover, specialized sensors are used to
+measure the ﬂooding water levels.
+The main application is based on the collected inputs it receives
+from the sensors. It then, acts based on the conﬁguration that is
+applied to the system. This conﬁguration is based on the requirements for the place that needs to be monitored. This is related to
+the type of crops that are planted in the ﬁeld (corn, potatoes,
+etc.), the chemical soil components (i.e. sodium content) and the
+season of the year (i.e. winter, summer etc).
+This system can be used by growers, who want to monitor the
+status of soil moisture content and watch on their computer monitor the conditions at various locations, follow the weather information and monitor in detail the irrigation operation. During the
+irrigation, they may also want to see the current location of irrigation. For example, if a rain shower passes over the ﬁeld, the software should be able to automatically adjust the amount of water
+being applied.
+In the proposed system, the routing protocol that is used to
+send trafﬁc from the information sources to the destination
+assumes the coexistence of a base station and, without loss of
+generality, of a set of homogeneous sensor nodes. These nodes
+
+(a)
+
+Internet
+Base
+Station
+
+(b)
+
+Initialization of the System
+Yes
+Is Temperature-Moisture and
+Wind Speed calculated
+
+No
+
+Yes
+Use the histrorical data
+
+Decision
+
+No
+
+Making
+
+Does the
+Field need
+Water
+Yes
+Start Irrigation
+Fig. 2. (a) The proposed WSN architecture, (b) the ﬂow chart of the proposed
+decision making system.
+
+are randomly distributed within a delimited area of interest. The
+base station is located at a long distance away from the sensor
+ﬁeld. Both the base station and the set of sensor nodes are considered stationary. The base station is able to transmit with high
+enough power to all the network nodes, due to its unlimited power
+supply. Moreover, the sensors are hierarchically organized into
+clusters.
+
+3.1. The irrigation and decision making system
+
+Fig. 1. Neighbouring parcels hosting different kinds of crops.
+
+In agriculture, the efﬁcient management of water should be considered. Therefore, the water required for irrigation has to be minimized. The proposed system based on the information sent from the
+sensors estimate the quantity of water needed. The sensors are used
+to send to the base station the humidity and the temperature of the
+
+158
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+
+soil, the humidity, the temperature and the speed of the air, and the
+duration of sunshine per day. The proposed system based on these
+values calculates the water quantity for irrigation. Moreover, to
+develop a more accurate system the historical data regarding the
+quantity of irrigation used in previous period are considered to
+adjust the quantity of water that is needed for irrigation. A comparison between current and past states is necessary to arrive at optimum decisions.
+The main parameters that affect the surface runoff are the following: the climate (rainfall intensity, moisture content, wind,
+evaporation) and the type of vegetation.
+An important factor for the implementation of an irrigation system is the knowledge of the soil moisture at the beginning of the
+growing season, which depends mainly on the weather conditions
+during the preceding winter. Additionally, the knowledge of the
+water quantity stored in underground aquifers, which is available
+for plants through the capillary rise, is critical.
+In order to reach a decision for the irrigation needs of a particular parcel, it is necessary to add up the useful water from the
+rain (Pe), the change in the stored moisture (SM) in the soil root
+zone at the beginning of the germination period, the crop
+evapotranspiration (ETc) and the water that by capillary elevation
+reaches the crop rooting zone from the ground (GW) – all these are
+measured in kg/m2 day. If the soil is cohesive, the water can easily
+rise above the ground level, but the rate of capillary rise is slow. On
+the contrary, if the soil is light, then the height of the capillary rise
+is limited, but the pace of growth is fast. If these rates are sufﬁcient
+to meet the water needs of the plant there is a steady development
+of the crop and the following holds:
+
+ETc  ðPe þ SM þ GWÞ ¼ 0
+
+ð1Þ
+
+If these water sources cannot meet the water needs of the crops
+for normal growth, the water balance is in deﬁcit. To achieve a
+smooth development and a normal yield, the crops should be provided with a quantity of water (IRn) equal to this deﬁcit:
+
+IRn ¼ ETc  ðPe þ SM þ GWÞ kg=m2 day
+
+ð2Þ
+
+where ETc is expressed as follows:
+
+ETc ¼ ETokc kg=m2 day
+
+ð3Þ
+
+kc is the crop coefﬁcient and ETo is the reference evapotranspiration
+in kg/m2 day that is expressed as follows:
+
+ETo ¼ 0:0023RaðTmean þ 17:8ÞTD0:5 kg=m2 day
+
+ð4Þ
+
+where Ra is the theoretical solar radiation expressed as equivalent
+depth of evaporated water in mm d1, Tmean is the mean air temperature in °C and TD is the difference between maximum and
+minimum air temperature in °C.
+Pe is presented as follows:
+
+Pe ¼ f ðDÞð1:25Pt 0:824  2:93Þ100:000955ETc kg=m2 day
+
+ð5Þ
+
+where Pt is the total precipitation in kg/m2 day and D is the decline
+allowed in the soil moisture content until the next irrigation dose is
+applied. The function f(D) is an adaptation factor that equals 1 when
+D = 75 kg/m2 day, whilst for every other value of D f(D) is expressed
+as follows:
+
+f ðDÞ ¼ 0:53 þ 0:0116D  8:94E  05D2 þ 2:32E  07D3
+
+ð6Þ
+
+The SM contribution is signiﬁcant in a water balance model for
+net crop requirements. The soil moisture is controlled by a combination of climate properties, land surface model characteristics and
+land–atmosphere interaction.
+GW contributes to the partial coverage of net the crop water
+requirements, through capillary elevation. The extent of the
+
+capillary elevation depends on the soil characteristics and the distance to the water table.
+In this paper, the main focus is on the use of a WSN to collect
+data using sensors and to send the data to a database. Then the
+sensed data can be used by a system for the automated irrigation
+of the ﬁelds. Therefore, in this paper Pe, SM, GW are not further
+analyzed. It is assumed that their values are provided by appropriate tensiometer sensors.
+Therefore, Pe, SM, GW are considered to sum up to a value k as
+presented in the following:
+
+Pe þ SM þ GW ¼ k kg=m2 day
+
+ð7Þ
+
+In this framework we consider k to be equal to the total amount
+of rain in this area expressed in kg/m2 day.
+Nevertheless, the value of the evapotranspiration (ETc) that is
+used to describe the sum of evaporation and plant transpiration
+from the land surface to the atmosphere is calculated based on
+information provided by sensors located in the ﬁelds. Evaporation
+is related to the amount of water that is sent to the air from sources
+such as soil, canopy interception and waterbodies. Transpiration is
+the amount of water in a plant and the subsequent loss of water as
+vapor through the stomata in its leaves.
+The rate of evapotranspiration depends on climatic factors (i.e.
+on temperature, sunlight, wind speed, and humidity). Therefore,
+an increase in the temperature in the wind speed or in the amount
+of sunlight results to a corresponding increase of evapotranspiration. On the other hand, humidity has the opposite effect.
+The models used in the literature to estimate the water quantity
+are categorized in empirical, computational and combinational.
+The empirical relationships are based on air temperature
+(Hargreaves, 1974; Thornthwaite and Hare, 1965). They only
+require as input the value of the air temperature and calculate
+the water without using other parameters, such as moisture or
+wind speed. Moreover, they are based on the mean values of temperature and may provide limited results if the period of use is less
+than a month.
+The computational models are based on the solar radiation
+(Caprio, 1974; Idso et al., 1977). They use the value of the radiation
+during the day to estimate the water without considering other
+parameters as moisture or temperature. They may have limited
+performance if the parcels are on a hill. The computational models
+may provide more accurate results as they consider all the environmental parameters to estimate the water for irrigation.
+In (Monteith, 1965), a combination model for the water based
+on parameters as temperature, moisture and wind speed is proposed. This model is general and does not consider the kind of
+crops in the estimation process of the required water. In
+(Doorenbos and Pruitt, 1977), a model that is an improvement of
+the model in Monteith (1965) and it is based on the kind of crops
+is proposed. However, both models offer high complexity and are
+difﬁcult to use in case of frequent changes on the parameters.
+Therefore, in Pristlet and Taylor (1972) a model that is based on
+the previously proposed models but is more ﬂexible due to its
+
+Table 1
+The detailed values of the quantity of water required the sensor data, the water
+history and the ratio.
+QWrequired
+
+QWi
+
+QWhistory
+
+QWratio
+
+9.57
+9.6
+9.78
+9.8
+9.97
+10
+10.07
+10.09
+
+10
+10
+10
+10
+10
+10
+10
+10
+
+7
+7.5
+8
+8.5
+9
+9.5
+10
+10.5
+
+0
+0
+0
+0
+0
+0
+0
+0
+
+159
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+
+low complexity is proposed. This model does not use the resistance
+of the surface to estimate the water.
+In this paper, the model proposed in Pristlet and Taylor (1972)
+for the calculation of evapotranspiration is used. The evapotranspiration according to this model is calculated as follows:
+
+D
+Rn
+
+Dþc k
+
+
+
+kg=m2 day
+
+10,5
+10,0
+
+QWrequired (kg/m2)
+
+
+ETc ¼ ae
+
+11,0
+
+ð8Þ
+
+where
+ae is a ﬁxed value and is considered to be equal to 1.3.
+D symbolizes the curve slope of the vapor saturation and is calculated based on the information from sensors on the air temperature and the saturation pressure of water as follows:
+
+D¼
+
+4098  es
+ðT þ 237:3Þ2
+
+9,5
+9,0
+8,5
+8,0
+
+QWrequired
+QWi
+QWhistory
+
+7,5
+7,0
+6,5
+0
+
+!
+h Pa= C
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+Numbers
+
+ð9Þ
+
+Fig. 3. The quantity of water required based on historical data and on sensor data.
+
+where T is the air temperature and es is the soil temperature
+expressed as follows:
+
+
+
+17:27T
+es ¼ 6:11  2:718Tþ237:3 h Pa
+
+12
+
+c ¼ ð0:67  ð1 þ 0:33  u2 ÞÞ h Pa= C
+
+QWrequired (kg/m2)
+
+c represents the air cool factor that depends on the air speed at 2 m
+height and it is calculated by the sensor as follows:
+ð11Þ
+
+where u2 is the air speed at 2 m height.
+Rn expresses the total net radiation energy that depends on
+microwave radiation that is sent from the sensor.
+
+Rn ¼ ðSn  LÞn kJ=m2 day
+
+ð13Þ
+
+
+D
+Rn
+  k kg=m2 day
+Dþc k
+
+ð14Þ
+
+8
+6
+4
+2
+
+-2
+-4
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+Numbers
+Fig. 4. The quantity of water required based on the ratio and sensor data.
+
+1,8
+
+Parcel A Cluster 1
+Parcel A Cluster 2
+Parcel B Cluster 1
+Parcel B Cluster 2
+Parcel C Cluster 1
+Parcel C Cluster 2
+Parcel D Cluster 1
+Parcel D Cluster 2
+Parcel E Cluster 1
+
+1,6
+
+Water Quantity (kg/m2day)
+
+QW i ¼ ðETc  kÞ kg=m2 day
+
+10
+
+0
+
+ð12Þ
+
+where Sn is the algebraic sum of the incoming minus the reﬂected
+microwave radiation and Ln is the net microware radiation. Both
+these values are based on the soil and air humidity values reported
+by the sensors.
+The parcels are categorized based on the geographical, topological and climate information as well as on the type of crops cultivated in them. In Fig. 1, we see an example where ﬁve different
+parcels with different crops are monitored. The parcels are then
+divided into clusters and the sensors are allocated in each cluster.
+For example, parcel A can be divided into two clusters. Then, based
+on the above mentioned characteristics of each cluster and on the
+real time data collected by the sensors the quantity of the water
+needed (QWi) at cluster i is calculated using the following
+equations:
+
+
+QW i ¼ ae
+
+QWrequired
+QWi
+QWrate
+
+14
+
+ð10Þ
+
+1,4
+1,2
+1,0
+0,8
+0,6
+0,4
+0,2
+
+The values of the above equations are collected by the sensors
+that are located in the parcels. The proposed system to save water
+for irrigation makes an adjustment on the quantity of water as
+calculated in (14) based on the information reported by the
+sensors. The system considers the mean value of the humidity
+Table 2
+The details of the quantity of water required, sensor data, water history and ratio.
+QWrequired
+
+QWi
+
+QWhistory
+
+QWratio
+
+13.5
+12.5
+11.5
+10.5
+9.5
+8.5
+7.5
+6.5
+
+10
+10
+10
+10
+10
+10
+10
+10
+
+7
+7
+7
+7
+7
+7
+7
+7
+
+4
+3
+2
+1
+0
+1
+2
+3
+
+18
+
+19
+
+20
+
+21
+
+22
+
+Temperature (oC)
+Fig. 5. The water quantity required in each parcel as a function of the temperature.
+
+and the temperature of soil, the humidity, the temperature and
+the speed of air, as well as the duration of the sunshine hours
+per day for the speciﬁc geographical area in previous periods.
+Therefore, the mean value of the water quantity used in previous periods is calculated as follows:
+
+QW history ¼
+where
+
+
+ae
+
+
+D0
+R0n
+0
+kg=m2 day
+
+
+k
+D0 þ c0 k0
+
+ð15Þ
+
+160
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+
+3.2. Case study
+
+Table 3
+The detailed values of the air speed, r, S0, humidity, latitude, n and N.
+Parcel, Cluster
+
+Air speed r
+
+S0
+
+Humidity (%) Latitude (°) n
+
+N
+
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+
+20
+20
+20
+20
+21
+21
+23
+23
+25
+
+43
+43
+43
+43
+43
+43
+43
+43
+43
+
+55
+55
+55
+57
+55
+57
+57
+59
+57
+
+10
+10
+10
+10
+10
+10
+10
+10
+10
+
+A, Cluster 1
+A, Cluster 2
+B, Cluster 1
+B, Cluster 2
+C, Cluster 1
+C, Cluster 2
+D, Cluster 1
+D, Cluster 2
+E, Cluster 1
+
+0.06
+0.06
+0.15
+0.15
+0.25
+0.25
+0.3
+0.5
+0.5
+
+41
+41
+41
+41
+41
+41
+41
+41
+41
+
+8.1
+8.1
+8.1
+8.1
+8.1
+8.1
+8.1
+8.1
+8.1
+
+D0 symbolizes the curve slope of the vapor saturation and is calculated based on the information in previous periods of the air
+temperature and the saturation pressure of the water.
+c0 represents the air cool factor that depends on the wind speed
+at 2 m height that is collected in the previous period.
+Rn0 expresses the total net radiation energy that depends on the
+microwave radiation that is sent from previous period.
+Moreover, the ratio of change on the values during the last days
+is calculated as follows:
+00
+ae DD00 þc  Rk00n
+ae DDþc  Rkn
+00
+
+QW ratio ¼
+
+00
+
+00 !
+
+k
+
+ð16Þ
+
+k
+
+where
+D00 symbolizes the curve slope of the vapor saturation and is calculated based on the information collected during the last days
+regarding the air temperature and the saturation pressure of the
+water.
+c00 represents the air cool factor that depends on the wind speed
+at 2 m height during the previous days.
+Rn00 expresses the total net radiation energy that depends on
+microwave radiation during the previous days.
+Therefore, the quantity of water needed for irrigation
+(QWrequired) is calculated as follows:
+
+It is important to consider the mean values of the humidity and
+the temperature of soil, the humidity, the temperature and the
+speed of air, and the duration of sunshine hours per day for the
+speciﬁc geographical area in previous periods. Therefore, their
+mean values for a speciﬁc area during the same month in previous
+years could provide indication on the environmental conditions.
+These mean values combined with the real time values collected
+by the sensors could provide better results for the water quantity
+required for irrigation.
+The proposed model is considered as an improvement to the
+one proposed in Pristlet and Taylor (1972) as it estimates the water
+for irrigation based on the previous values collected by sensors. An
+example that proves the efﬁcient management of water by the system is the case that for a speciﬁc ﬁeld the mean water required for
+irrigation based on (14) is 10 kg/m2 per day. This quantity of water
+can be minimized if historical data are considered. If historical data
+are used, then the mean value for irrigation could be less than the
+current measurements. If the value is 5 kg/m2 the water that will
+be used for irrigation will be less than the current amount (using
+(14)) and it can be calculated as follows:
+QW required ¼ ðQW history  QW i Þ=QW history ¼ ð5  10Þ=5 ¼ 1 kg=m2 day
+
+Therefore, there is no need for irrigation when historical data
+are used but there is a need to pump out water. Thus, water can
+be managed more efﬁciently. Moreover, in case that the mean ratio
+of change of the water required for irrigation the previous month is
+1 and the current water required for irrigation is 10 kg/m2 then
+less water is required for irrigation (see Tables 1 and 2).
+In Fig. 3 the water quantity required for a cluster in relation to
+the quantity of water history and the water based on the sensor
+data is shown.
+In Fig. 4 the water quantity required for a cluster as a function of
+the quantity of water ratio and water based on the sensor data is
+shown.
+The total water QWA that is required for irrigation in parcel A is
+expressed as follows:
+n
+X
+QW required
+
+QW A ¼
+
+2
+
+If no historical values are available, the proposed system can be
+adjusted to use only the information provided by the real time
+values from sensors.
+
+!
+kg=m2 day
+
+ð19Þ
+
+i¼1
+
+QW required ¼ QW i þ ðQW history  QW i Þ=QW history þ QW ratio kg=m day
+ð17Þ
+
+ð18Þ
+
+where n stands for the number of clusters in parcel A.
+Also the total amount of water QWtotal that is required for irrigation in parcels A to E is expressed as follows:
+
+QW total ¼
+
+m
+X
+QW A
+
+!
+kg=m2 day
+
+ð20Þ
+
+i¼1
+
+Water Quantity (kg/m2day)
+
+1,5
+Parcel A Cluster 1
+Parcel A Cluster 2
+Parcel B Cluster 1
+Parcel B Cluster 2
+Parcel C Cluster 1
+Parcel C Cluster 2
+Parcel D Cluster 1
+Parcel D Cluster 2
+Parcel E Cluster 1
+
+where m is the number of the parcels.
+In Fig. 5 the water quantity required in each parcel based on the
+change of the temperature is described. The air speed, the albedo
+
+Table 4
+The detailed values of the air speed, r, S0, humidity, latitude and temperature.
+
+1,0
+
+0,5
+8,0
+
+8,2
+
+8,4
+
+8,6
+
+8,8
+
+9,0
+
+9,2
+
+9,4
+
+9,6
+
+Real Sunlight (hr)
+Fig. 6. The water quantity required in each parcel based on the change of the
+duration of real sunlight.
+
+Parcel, Cluster
+
+Air
+speed
+
+r
+
+S0 Humidity
+(%)
+
+Latitude
+(°)
+
+Temperature
+(°C)
+
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+Parcel
+
+20
+20
+20
+20
+21
+21
+23
+23
+25
+
+0.06
+0.06
+0.15
+0.15
+0.25
+0.25
+0.3
+0.5
+0.5
+
+43
+43
+43
+43
+43
+43
+43
+43
+43
+
+41
+41
+41
+41
+41
+41
+41
+41
+41
+
+18
+18
+18
+18
+18
+18
+23
+23
+25
+
+A, Cluster 1
+A, Cluster 2
+B, Cluster 1
+B, Cluster 2
+C, Cluster 1
+C, Cluster 2
+D, Cluster 1
+D, Cluster 2
+E, Cluster 1
+
+55
+55
+55
+57
+55
+57
+57
+59
+57
+
+161
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+
+LEACH
+ELCH
+ECHERP
+
+Nodes Alive (number)
+
+100
+
+80
+
+60
+
+40
+
+20
+
+0
+0
+
+200
+
+400
+
+600
+
+800
+
+1000
+
+aggregates the data and then transmits the compressed data to
+the upper lever cluster heads until the data reaches the base
+station.
+The sensor nodes placed in a WSN have the responsibility of the
+event detection, data processing and transmission of data. The
+energy spent on these actions has to be minimized as the nodes
+are battery equipped and thus have limited energy. The notation
+of rounds is used to describe the successful send of data from sensors to the BS. Therefore, one round is the one-time data send from
+all sensors to the BS.
+The energy ETx(k,d) that a node dissipates for the radio transmission of a message of k bits over a distance d is due to running both
+the transmitter circuitry ETx-elec(k) and the transmitter ampliﬁer
+ETx-amp(k,d) and is given by the following:
+
+Network Lifetime (rounds)
+
+2
+
+Fig. 7. Number of nodes alive versus the network lifetime in rounds.
+
+(r), the solar radiation on the outer boundary of the atmosphere
+(S0), the humidity, the latitude, the duration of sunshine (n), and
+the maximum sunlight (N) are provided in Table 3.
+Fig. 6 shows the water quantity required in each parcel as a
+function of the duration of sunlight. The detailed values of the air
+speed, albedo (r), solar radiation on the outer boundary of the
+atmosphere (S0), humidity, latitude, and temperature are shown
+in Table 4.
+
+ETx ðk; dÞ ¼ ET X-elec ðkÞ þ ETx-amp ðk; dÞ ¼ Eelec  k þ eamp  k  d
+
+ð21Þ
+
+where Eelec is the transmitter circuitry dissipation per bit, which is
+supposed to be equal to the corresponding receiver circuitry dissipation per bit and eamp is the transmit ampliﬁer dissipation per
+bit per square meter. Moreover, in case that the node distance from
+the base station is d, it is more efﬁcient to split this distance including a few nodes in the middle. In case that d = d1 + d2 + d3, then
+2
+
+2
+
+2
+
+2
+
+d > d1 þ d2 þ d3 . Thus the ETx(k,d) reaches its minimum value.
+Similarly, the energy ERx(k) dissipated by a node for the reception of a k bit message is due to running the receiver circuitry
+ERx-elec(k) and is given by:
+
+ERx ðkÞ ¼ ERX-elec ðkÞ ¼ Eelec  k
+
+In this section, the proposed model is evaluated using ECHERP, a
+protocol that pursues energy conservation (Nikolidakis et al., 2013).
+ECHERP is a scheme that is based on the appropriate selection of
+nodes as cluster heads. It models the network and the energy spent
+to transmit data from sensors to base station, as a linear system.
+Then, using the Gaussian elimination algorithm it selects the cluster
+heads of the network. Its main characteristic is that it elects as
+cluster head the node that minimizes the total energy consumption
+on the cluster.
+Based on the energy level and location information that the
+nodes send, each node sets up a neighbour information table and
+sends this table along with its corresponding information to its
+neighbours. This information is sent to the BS that runs a Gaussian
+elimination algorithm to compute the number of rounds at which
+every node can be a cluster head, trying to maximize the network
+lifetime. The BS broadcasts the unique IDs of the newly selected
+cluster heads and their cluster members and the nodes use this
+information to enter a cluster. The lower level cluster head
+
+In order to evaluate the performance of ECHERP, simulations
+over 50 different 100 m  100 m network topologies were performed. The general network architecture considered is the
+following:
+
+Average Energy Disippation (Joule)
+
+4. Performance evaluation of the proposed model
+
+ð22Þ
+
+ A ﬁxed base station is located away from the sensor nodes.
+ The sensor nodes are energy constrained with a uniform initial
+energy allocation.
+ Each node senses the environment at a ﬁxed rate and always
+has data to send to the base station.
+ The sensor nodes are immobile.
+ The network is homogeneous and all nodes are equivalent, i.e.
+they have the same computing and communication capacity.
+ The network is location unaware, i.e. the physical location of the
+nodes is not known in advance.
+ The transmitter can adjust its ampliﬁer power based on the
+transmission distance.
+In all the simulation scenarios we examined 100 homogeneous
+nodes with an initial energy of 3 J, randomly scattered within a
+100  100 m2 sensor ﬁeld. The BS was positioned at point
+(0,150), so it is at least 100 m away from the centre of the ﬁeld
+and the packets sent are 36 bytes. The energy consumption due
+to communication is calculated using the ﬁrst order energy model
+(Heinzelman et al., 2000). We assume that each sensor node generates one data packet per round to be transmitted to the BS. The
+
+3,0
+2,5
+2,0
+1,5
+1,0
+
+Table 5
+Comparison of ECHERP to LEACH and ELCH over the distance of the base station from
+the sensor ﬁeld when the initial node energy is set to 3 J.
+
+LEACH
+ELCH
+ECHERP
+
+0,5
+0,0
+0
+
+200
+
+400
+
+600
+
+800
+
+1000
+
+Network Lifetime (rounds)
+Fig. 8. Average energy dissipation versus network lifetime in rounds.
+
+Distance between the
+base station and the
+centre of WSN ﬁeld (m)
+
+First node
+depletion
+time (%)
+
+Last node
+depletion
+time (%)
+
+Mean energy Compared
+consumption protocol
+(%)
+
+150
+150
+
++90
++90
+
++25
++0.5
+
+19.5
+0.5
+
+LEACH
+ELCH
+
+162
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+0,0026
+10
+
+Water/Lifetime Ratio
+0,0025
+
+Water/Lifetime Ratio
+
+Water Required (lt)
+
+9
+
+ECHERP
+
+8
+7
+6
+5
+
+0,0024
+
+0,0023
+
+0,0022
+
+4
+0
+
+50
+
+100
+
+150
+
+200
+
+0,0021
+
+250
+
+0
+
+100
+
+Sampling Interval (sec)
+Fig. 9. The required water as a function of the sampling interval in lt.
+
+0,025
+
+Water/Lifetime Ratio
+
+200
+
+300
+
+400
+
+500
+
+Size of Network (number)
+Fig. 11. Size of network as a function of the water/lifetime ratio.
+
+Table 6
+The network lifetime (in rounds), the time of a round (in s), the network lifetime (in s)
+and the quantity of water required when ECHERP is used.
+
+0,020
+
+Water/Lifetime Ratio
+0,015
+
+0,010
+
+0,005
+
+0,000
+0
+
+500
+
+1000
+
+1500
+
+2000
+
+2500
+
+3000
+
+3500
+
+4000
+
+Network Lifetime (min)
+Fig. 10. Network lifetime as a function of water/lifetime ratio.
+
+sensor nodes were grouped into clusters consisting of cluster heads
+that send data to upper level cluster heads to ﬁnally reach the BS.
+Fig. 7 shows the number of nodes that remain alive when
+LEACH, ELCH and ECHERP are applied. More precisely, the depletion of all the network nodes in LEACH, ELCH and ECHERP takes
+place during the 800th, 980th and 995th rounds respectively.
+Fig. 8 shows the average energy dissipation of the compared
+protocols as a function of time measured in rounds. As this ﬁgure
+depicts, the performance of ECHERP is considerably better than
+LEACH and ELCH.
+A more analytical description of the effects of the use of the
+three protocols in comparison may be derived by focusing on
+the ﬁrst node depletion time, the last node depletion time and
+the average energy consumption. Table 5, summarizes the simulation results which are illustrated in Figs. 7 and 8, concerning these
+metrics in the case of uniform energy distribution.
+Fig. 9 shows the water required as a function of the sampling
+interval of ECHERP. As this ﬁgure depicts, the performance of
+ECHERP is considerably better as the sampling interval increases.
+Fig. 10 shows the network lifetime of ECHERP as function of the
+water/lifetime ratio. As this ﬁgure depicts, the performance of
+ECHERP is good up to the 1825th minute.
+Fig. 11 shows the size of network of ECHERP on the water/lifetime ratio. As this ﬁgure depicts, the performance of ECHERP is
+good in small networks.
+In Table 6, the network lifetime in rounds, the time of a round in
+s, the network lifetime in s and the quantity of water required
+when using ECHERP is presented.
+
+Network lifetime in
+rounds
+
+Time for a
+round in s
+
+Network
+lifetime in s
+
+Quantity of water
+required
+
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+995
+
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+110
+120
+130
+140
+150
+160
+170
+180
+190
+200
+210
+220
+230
+
+9950
+19,900
+29,850
+39,800
+49,750
+59,700
+69,650
+79,600
+89,550
+99,500
+109,450
+119,400
+129,350
+139,300
+149,250
+159,200
+169,150
+179,100
+189,050
+199,000
+208,950
+218,900
+228,850
+
+4
+4.1
+4.3
+4.4
+4.5
+4.65
+4.75
+4.8
+4.85
+4.9
+4.95
+5.1
+5.4
+5.8
+6.2
+6.5
+7
+7.2
+7.8
+8.1
+8.4
+8.7
+9.7
+
+In order to evaluate the performance of the proposed model, a
+number of simulations using different values of time required for
+a round have been considered. In the simulation tests the
+trade-off between the time of a round and the water required is
+deﬁned. The main objective of this model is to keep the energy
+consumption of the nodes in low level while having more accurate
+measurements from sensors on the water required.
+The total water required for irrigation is expressed as follows:
+
+Total Water ¼ Mean Water  rounds
+
+ð23Þ
+
+where Total Water represents the quantity of water required based
+on the irrigation model presented in (17). Mean Water represents
+the average value of the water required when different values of
+time for a round are considered. Moreover, the round represents
+the number of times that the exchange of data from sensors to base
+station is performed.
+The quantity of water required for irrigation is calculated as
+follows:
+
+Water ¼ Total Water=lifetime
+
+ð24Þ
+
+S.A. Nikolidakis et al. / Computers and Electronics in Agriculture 113 (2015) 154–163
+
+Based on the above formulas simulation tests were performed
+to calculate the quantity of water required and the lifetime of
+the network for various values of round time ranging from 10 to
+230 s. In all the tests it was assumed that the duration of the network lifetime was equal to 995 rounds. The simulation results are
+summarized in Table 6.
+Therefore if a round in ECHERP is equal to 110 s energy efﬁciency is provided while smaller quantities of water are consumed.
+5. Conclusions
+This paper focused on the issue of automated irrigation in agriculture and proposed a novel system for efﬁcient irrigation using
+WSNs. The proposed system is based on a model which performs
+efﬁcient irrigation management by ﬁnding the appropriate
+schemes for the rational utilization of water for irrigation. The
+automated irrigation system proposed is based on the use of a novel routing protocol named ECHERP. The utilization of this protocol
+offers remarkable energy efﬁciency. The development of novel systems, like the one proposed in this paper, which combines efﬁcient
+irrigation models along with energy efﬁcient utilization of WSNs
+shows to be a very promising and effective application of automation in agriculture. The proposed model can be further extended to
+consider the effect of the ﬁeld characteristics on the quantity of
+water required for irrigation.
+References
+Caprio, J.M., 1974. The Solar Thermal Unit Concept in Problems Related to Plant
+Development and Potential Evapotranspiration. Phenology and Seasonality
+Modeling. Springer, pp. 353–364.
+Diaz, S., Perez, J., Mateos, A., Marinescu, M., Guerra, B., 2011. A novel methodology
+for the monitoring of the agricultural production process based on wireless
+sensor networks. Comput. Electron. Agric. 2 (4), 252–265.
+Doorenbos, J., Pruitt, W.O., 1977. Crop Water Requirements. FAO Irrigation and
+Drainage Paper No. 24, FAO, Rome.
+Dubey, V., Dubey, N., Chouhan, S., 2011. Wireless sensor network based remote
+irrigation control system and automation using DTMF code. Proc. Int. Conf.
+Communication Systems and Network Technologies. USA. pp. 34–37.
+Hargreaves, G.H., 1974. Evapotranspiration. Rev. Geophys. Space Phys. 13, 487–494.
+Heinzelman, W., Chandrakasan, A., Balakrishnan, H., 2000. Energy-efﬁcient
+communication protocol for wireless microsensor networks. Proc. Int. Conf.
+System Sciences, HI, vol. 8(1), pp. 1–10.
+
+163
+
+Idso, S.B., Reginato, R.J., Jackson, R.D., 1977. An equation for potential evaporation
+from soil, water and crop surfaces adaptable to use by remote sensing. Geophys.
+Res. Lett., 187–188
+Kim, Y., Evans, R., 2009. Software design for wireless sensor-based site-speciﬁc
+irrigation. Comput. Electron. Agric. 1 (7), 159–165.
+Kim, Y., Evans, R., Iversen, W., 2008. Remote sensing and control of an irrigation
+system using a distributed wireless sensor network. Trans. Instrum. Meas. 57
+(7), 1379–1387.
+Lindsey, S., Raghavendra, C., 2002. PEGASIS: power-efﬁcient GAthering in sensor
+information systems. Proc. Int. Conf. Aerospace, Montana, vol. 3(2), pp. 112–
+1130.
+Lotf, J., Bonab, M., Khorsandi, S., 2008. A novel cluster-based routing protocol with
+extending lifetime for wireless sensor networks. 5th International Conference
+on Wireless and Optical Communications Networks, Surabaya, India. pp. 1–5.
+Manjeshwar, A., Agrawal, D., 2009. Teen: a routing protocol for enhanced efﬁciency
+in wireless sensor networks. Proc. Int. Parallel and Distributed Processing
+Symposium (IPDPS’01) Workshops, California. pp. 2009–2015.
+Meron, M., Assaf, R., Bravdo, B., Wallach, R., Hallel, R., Levin, A., Dahan, I., 1995. Soil
+sensor actuated microirrigation of apples. Proc. Int. Microirrigation Congr., 486–
+491
+Monteith, J., 1965. Evaporation and environment. Symp. Soc. Exp. Biol. 19, 205–234.
+Nikolidakis, S., Kandris, D., Vergados, D., Douligeris, C., 2013. Energy efﬁcient
+routing in wireless sensor networks through balanced clustering. Algorithms 6
+(1), 29–42.
+Pristlet, C., Taylor, R., 1972. On the assessment of surface heat ﬂux and evaporation
+using large-scale. Parameters, 81–92.
+Rehman, A., Abbasi, A., Islam, N., Shaikh, Z., 2011. A review of wireless sensors and
+networks’ applications in agriculture. Comput. Standards Interfaces 5 (3), 1–8.
+Shu-ming, X., Liang-min, W., Xiao-qian, Q., Yong-zhao, Z., Liang-min, W., 2009.
+Application Research of WSN in Precise Agriculture Irrigation. International
+Conference in Environmental Science and Information Application Technology,
+China. pp. 297–300.
+Stone, K., Smajstrla, A., Zazueta, F., 1985. Microcomputer-based data acquisition
+system for continuous soilwater potential measurements. Soil Crop Sci. Soc. Fla.,
+49–53
+Sudha, M., Valarmathi, M., Babu, A., 2011. Energy efﬁcient data transmission in
+automatic irrigation system using wireless sensor networks. Comput. Electron.
+Agric. 7 (9), 215–221.
+Testezlaf, R., Zazueta, F., Yeager, T., 1997. A real-time irrigation control system for
+greenhouses. Appl. Eng. Agric. 10 (1), 329–332.
+Thornthwaite, C.N., Hare, F.K., 1965. The loss of water to the air. Meteor. Monog. 6,
+163–180.
+Xiaohong, P., Zhi, M., Laisheng, X., Guodong, L., 2009. A water-saving irrigation
+system based on fuzzy control technology and wireless sensor network. Proc.
+Int. Conf. Wireless Communications, Networking and Mobile Computing,
+Beijing. pp. 1–4.
+Zazueta, F., Smajstrla, A., 1992. Microcomputer-based control of irrigation systems.
+Appl. Eng. Agric. 8 (1), 593–596.
+Zhang, R., Guo, J., Zhang, L., Zhang, Y., Wang, L., Wang, Q., 2011. A calibration
+method of detecting soil water content based on the information-sharing in
+wireless sensor network. Comput. Electron. Agric. 1 (10), 161–168.
+
+

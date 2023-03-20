@@ -1,0 +1,361 @@
+Theme Article: Envisioning Our Future Digital World
+
+The Future of Digital
+Agriculture: Technologies
+and Opportunities
+Spyros Fountas, Borja Espejo-Garcıa,
+Aikaterini Kasimati, Nikolaos Mylonas, and
+Nicoleta Darra
+Agricultural University of Athens
+
+Abstract—This article presents key technological advances in the digital agriculture,
+which will have significant impact. Artificial intelligence-based techniques, together with
+big data analytics, address the challenges of agricultural production in terms of
+productivity and sustainability. Emerging new applications will transform agriculture from
+the traditional farm practices to a highly automated and data intensive industry.
+
+& THE
+
+is transforming agriculture by using modern machinery, computerized tools, and information and communication
+technologies (ICTs) to improve decision making
+and productivity. The spread of several cuttingedge technologies, from GPS and remote sensing
+to big data, artificial intelligence and machine
+learning, robotics, and the Internet of Things
+(IoT), to agriculture is leading to increased
+yields, lower costs, and reduced environmental
+impact. Data-driven solutions are unlocking production potential in a sustainable and resourceefficient way.
+DIGITAL REVOLUTION
+
+Digital Object Identifier 10.1109/MITP.2019.2963412
+Date of current version 12 February 2020.
+
+24
+
+1520-9202 ß 2020 IEEE
+
+Precision agriculture management systems are
+allowing growers to benefit from this new tsunami
+of data they can gather. These systems collect,
+classify, and analyze vast amounts of data to
+detect patterns and solutions. They enable farmers to observe, comprehend, and manage the variability in their production systems by tailoring
+inputs to get desired outputs. GPS-controlled tractors can work around the clock, ploughing, planting, and harvesting while gathering continuous
+“on-the-go” georeferenced data. These self-driving
+vehicles can perform precise operations, with the
+help of GPS, Geographical Information Systems
+(GIS), and Variable-Rate Technology (VRT).
+Weather stations supply a variety of agriculture-specific weather data. Such weather data
+
+Published by the IEEE Computer Society
+
+IT Professional
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 11:58:30 UTC from IEEE Xplore. Restrictions apply.
+
+are fed into the big data pool and promote farming decisions, such as irrigation decision making
+based on plant-water demand and accurate forecast of harvest dates. Remote and proximal sensing is used to capture invaluable soil and crop
+related data through hyperspectral, multispectral, and thermal sensors or cameras. Unmanned
+aerial vehicles (UAV) for agricultural purposes
+have the potential to be used from analysis
+applications, by producing soil and field threedimensional models, data acquisition, and crop
+growth monitoring, to spraying or planting applications.1 They are delivering regularly updated
+high-quality data to provide insight into crop
+development and highlight ineffective practices
+to track changes in health and maturity and to
+identify parts of a field experiencing “hydric
+stress.” UAVs have also proven well suited for
+crop spraying, as they can apply fertiliser, herbicide, and pesticide liquids faster, more accurately, and with higher efficiency. Finally, UAVplanting systems are under development by
+using compressed air to fire seedpods directly
+into the ground.
+The digitalization enables farmers to control
+their farms remotely and manage agricultural
+activities in a more effective way. In the near
+future, IoT will allow for automatic real-time
+interaction, controlling, and decision-making as
+agriculture sensors, actuators, and devices, as
+aforementioned, will all be interconnected. This
+will minimize human effort while saving time and
+increasing both yield and profit.2 The emergence
+of cloud-based farm management platforms,
+such as the SmartFarm and Agrivi, aims to integrate these data coming multiple sources and
+include decision support systems. All these give
+growers insights for dynamic management planning, which have traditionally only been available to corporate megafarms. A general
+overview of the digital agriculture can be seen in
+Figure 1.
+
+REMOTE SENSING
+A variety of remote sensing technologies, from
+proximal sensors (within 1 m distance from the
+monitoring object), to drones, to satellites are
+used by the agricultural sector, providing insight
+to tackle the uncertainties coming from the
+
+January/February 2020
+
+variations of weather conditions and management
+strategies. These sensors exploit vegetation’s
+reflectance properties and provide the opportunity to assess biomass, yield, acreage, vegetation
+vigor, drought stress, and phenological development, enabling early and efficient decision making
+in fertilization, irrigation, and pest management.
+Currently, the commercial availability of very
+high-resolution satellite data that varies in technique (active/passive, radiometer/scatterometer), spatial resolution (from submeter to
+kilometers), spectral range, and viewing geometry
+has opened up a number of new perspectives on
+the use of earth observation products in agricultural monitoring,3 both at large and small scale
+areas. Similar information can also be retrieved by
+UAV remote sensing systems, which are often
+operated at very low altitude. Such systems use
+multispectral, hyperspectral, and thermal cameras that can measure heat, radiation, or light to
+capture a diverse electromagnetic spectrum.
+Although data retrieval in this case is less dependent on weather conditions, simplifying or even
+omitting atmospheric correction, these images
+cover much less area compared to the satellite
+products.
+Technological advancements, such as analytical platforms, multispectral and hyperspectral
+sensors, as well as satellite data hubs that provide free and open access to satellite products [
+e.g., Copernicus Open Access Hub (ESA), EarthExplorer (United States Geological Survey),
+National Oceanic and Atmospheric Administration (United States Department of Commerce)],
+can act as the stepping stone for building reliable agronomic models on the basis of existing
+data generated by innovative monitoring applications. Furthermore, the development of agricultural infrastructure networks that allow faster
+and complete mining of the agricultural information through satellite data in deeper and broader
+horizons is necessary to improve the quality and
+efficiency of agricultural monitoring. This can
+also accelerate the delivery of agricultural data
+platforms, which could provide timely comprehensive information, to guide agronomic and
+economic decision making. However, the limited
+access of the farmers to the ground truth information becomes an obstacle to evaluate the
+crop status under various environmental
+
+25
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 11:58:30 UTC from IEEE Xplore. Restrictions apply.
+
+Envisioning Our Future Digital World
+
+Figure 1. View of a digital agricultural field that has IoT devices to sense soil moisture, robotic vehicles
+(ground and aerial), and antennas to receive satellite images. Copyright: Authors; published with permission.
+
+conditions. Therefore, efforts to establish networks of validation sites with the support of
+space agencies and/or environmental institutions are required.
+Some of the challenges in agricultural remote
+sensing are related to standartalization of the
+data coming from different types of sources and
+different georeferenced systems, which cause
+problems on image projection and mapping. A
+space, aerial, and ground integrated structure to
+manage multiple sources of the remotely sensed
+crop parameters for agricultural data acquisition
+can also be the key to accurate visualization and
+monitoring of the crop status from multiple perspectives. The heterogeneity of satellite products
+in terms of spatial, spectral, temporal, and radiometric characteristics can also cause accuracy
+problems and be highly inadequate with the
+wrong approach. Finally, advanced remote sensing technologies generate a massive amount data
+of high volume and complexity, increasing the
+challenges of data storage and computation
+power, leading to serious issues in data management. For potential users, the wide variety of
+products can be confusing, and the analysis
+of the derived data is sometimes still too
+complicated.
+
+26
+
+ROBOTIC SYSTEMS TO AUTOMATE
+MONOTONOUS FARM OPERATIONS
+Robotic systems have found fertile ground in
+agriculture tasks, due to the progress of ICT technologies, mainly advanced sensing, actuation,
+and AI. The increasing demand for accurate field
+operations, while reducing the farming inputs
+and environmental impact, constitute robotic
+platforms as the alternative of conventional tractors and implements. Small sized, electrically
+driven platforms are employed for a wide range
+of tasks, such as light ploughing, spraying, fertilizing, and harvesting. Especially in greenhouse production, due to the controlled environment
+conditions and structured cultivation properties,
+there are already commercial solutions offering
+significant advantages mainly for fruit harvesting.
+Finally, robotics have found several applications
+in livestock production, with more prominent evidence such as autonomous milking robots,
+manure scraping, and feeding platforms, combined with individualized care and health monitoring using identification technologies like RFID.
+Considering the technological edge that these
+platforms can offer to agriculture, there are important challenges that prevent robotics from reaching their full potential. The existing prototypes
+
+IT Professional
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 11:58:30 UTC from IEEE Xplore. Restrictions apply.
+
+and commercial platforms are limited to task-specific operations, whereas the scalability to different crops or environments is questioned.
+Furthermore, there are many interoperability and
+standardization problems when it comes to agrorobotics, with the communication of platforms
+and safety issues posing considerable barriers.
+Expanding the capabilities of robots from the lab
+and greenhouse environment to the outdoor conditions is crucial, when it comes to sensing under
+harsh environments and operating under unpredicting conditions. Regardless of the technical
+barriers, there is considerable skepticism related
+to social, economical, and ethical challenges in
+agricultural robotics. Labor shift from repetitive
+tasks to high-skilled engineering jobs and the
+imbalanced adoption of agritechnologies by farmers is expected to create social implications.
+Advanced intelligence and decision-making capabilities of robots results in debates about moral
+aspects and, overall, who has the responsibility
+for these actions. Moreover, expensive technologies and the demand for resources and infrastructures to launch robotics in the field will challenge
+the effective adoption of robotics from the feasibility point of view.
+Moving toward the era of intelligence systems,
+robotic platforms will be the cornerstone of agriculture operations. UAV platforms will manage
+several light weight tasks, such as spraying and
+health inspections, as well as supervising ground
+robot fleets operating in the field. In the future,
+robots will be able to collaborate with humans
+without compromising safety in tasks like harvesting. To this end, robot cognition is expected to
+reach supremacy levels, with the systems able to
+have full environment awareness and clear reasoning of the decisions taken, for example, how to
+treat rotten fruit during harvesting or interrupt
+spraying when humans are in close range.
+
+AI IN DIGITAL AGRICULTURE
+AI applications in agriculture are increasing.
+Deep learning constitutes the state-of-the-art
+method for image and language processing with
+promising results for addressing farming problems, such as weed detection, plant disease diagnosis, crop type classification, and pesticide
+recommendations. Techniques stemming from
+
+January/February 2020
+
+deep learning, such as transfer learning or capsule networks, will lead future decision making
+by taking into account several factors, such as
+environmental conditions, harvesting practices,
+financial needs, soil characteristics, or water
+availability.
+Deep learning methods, specifically convolutional nets (CNNs), are gaining fast growth for
+the automation of crop classification and disease/weed identification. The main reason is
+that contrary to the conventional machine-learning techniques, CNN training allows automatic
+learning representations of data with multiple
+levels of abstraction. Although CNNs are very
+data demanding, a technique called transfer
+learning is used to overcome this requirement
+by reusing patterns learned by state-of-the-art
+CNNs in the related tasks. Additionally, CNNs
+have also shown promising results with other
+problems, such as yield prediction, by extracting
+patterns from satellite imagery.
+In the future, other techniques are expected to
+emerge solve open problems in agriculture.
+Regarding to computer vision related problems,
+such as crop classification and disease/weed
+identification, new architectures, such as capsule
+networks, will address current CNN limitations.4
+Contrary to CNNs, capsules (grouped neurons)
+consider the spatial relationships between entities and learn these relationships via dynamic
+routing, utilizing a nonlinear function called
+squashing. In regard to the use of reinforcement
+learning instead of the supervised one, architectures, such as imagination-augmented agents, will
+also play an important role, extending intelligence
+through imagination by learning to interpret predictions from a learned environment model.5
+On the other hand, the extraction of information from natural language documents containing policies and regulations could be addressed
+by a recurrent neural network (RNN). Specifically, a subtype of RNNs called long short-term
+memories have arisen in the past years as good
+at modeling varying length sequential data,
+achieving state-of-the-art results for many problems in natural language processing (NLP), such
+as machine translation, information extraction,
+and text classification. Similar to computer
+vision, the use of transfer learning by word
+embedding techniques based on ELMO and
+
+27
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 11:58:30 UTC from IEEE Xplore. Restrictions apply.
+
+Envisioning Our Future Digital World
+
+BERT will help to avoid the expensive creation of
+the necessary language model for more
+advanced NLP tasks. Such systems have been
+used to extract expert knowledge for regulations
+on pesticide use or agricultural knowledge from
+existing research databases.
+Finally, another technique will be relevant in
+the near future: generative adversarial networks
+(GANs). This type of network could address the
+problem of data scarcity within agricultural computer vision when transfer learning and traditional data augmentation are not enough. The
+main advantage of GANs is that they can create
+pictures with synthetic “real” crops instead of
+just rotating or adding noise to the existing
+ones. This synthetic data could be used to
+improve the generalization ability of a CNN that
+obtains poor results due to the constraints in
+the size of the original dataset and the limitations of the traditional techniques.
+
+CONCLUSION
+Digital agriculture is developing rapidly,
+driven by many technological advances in the
+area of remote sensing, artificial intelligence, and
+robotic systems. These systems enable farmers
+to produce comprehensive, accurate, and transparent crop and livestock products, both at the
+national and regional levels and to get increased
+yield and quality, minimizing the environmental
+impact. However, several challenges and limitations, such as accuracy, interoperability, data
+storage, computation power, and farmers reluctance to adoption, need to be addressed for effective use of these technologies and widespread
+digital transformation of agriculture.
+
+& REFERENCES
+1. J. Miranda, P. Ponce, A. Molina, and P. Wright,
+“Sensing, smart and sustainable technologies for AgriFood 4.0,” Comput. Industry, vol. 108, pp. 21–36, 2019.
+2. A. Khanna and S. Kaur, “Evolution of Internet of Things
+(IoT) and its significant impact in the field of Precision
+Agriculture,” Comput. Electron. Agriculture, vol. 157,
+pp. 218–231, 2019.
+3. S. R. Oza, S. Panigrahy, and J. S. Parihar, “Concurrent
+use of active and passive microwave remotesensing
+
+4. S. Sabour, N. Frosst, and G. E. Hinton, “Dynamic
+routing between capsules,” in Proc. 31st Int. Conf.
+Neural Inf. Process., 2017, pp. 3859–3869.
+re et al., “Imagination-augmented agents
+5. S. Racanie
+for deep reinforcement learning,” Adv. Neural Inf.
+Process. Syst., 2017. arXiv:1707.06203.
+
+Spyros Fountas is an associate professor with
+the Agricultural University of Athens, Greece. He
+received the M.Sc. degree in information technology
+from Cranfield University, Cranfield, U.K. and the
+Ph.D. degree in precision agriculture from Copenhagen University, Copenhagen, Denmark. He is the
+Editor-in-Chief for Computers and Electronics in
+Agriculture (Elsevier), since 2014. He is the
+corresponding author of this article. Contact him at
+sfountas@aua.gr.
+Borja Espejo-Garcia is a postdoc researcher with
+the Agricultural University of Athens, Greece. From
+2015 to 2019, he worked toward the Ph.D. degree in
+artificial intelligence with the University of Zaragoza,
+Spain, and the M.Sc. degree in computer science
+with a postgraduate course in systems engineering.
+Contact him at borjaeg@aua.gr.
+Aikaterini Kasimati is an agricultural engineer with
+experience in precision agriculture, bioenvironmental
+engineering, and energy production. She received the
+M.Sc. degree in agricultural and biological engineering from the University of Illinois, Champaign, IL, USA.
+She is currently working toward the Ph.D. degree with
+the Agricultural University of Athens, Greece, in the
+field of precision agriculture and big data analytics.
+Contact her at akasimati@aua.gr.
+Nikos Mylonas is a mechanical engineer and
+received the M.Sc. degree in biosystems engineering,
+Wageningen University and Research, Wageningen,
+the Netherlands, focusing on computer vision in agriculture. His main research interests include the field of
+AI and robotic applications in horticulture. Contact
+him at nmylonas@aua.gr
+Nicoleta Darra is an agricultural biotechnologist
+with the Agricultural University of Athens, Greece,
+from where she received the M.Sc. degree in bioinformatics. For three years, she has been involved in
+research on precision agriculture with emphasis
+on remote sensing applications. Contact her at
+nicoletadarra@aua.gr.
+
+data for monitoring of rice crop,” Int. J. Appl. Earth
+Obst. Geoinform., vol. 10, pp. 296–304, 2008.
+
+28
+
+IT Professional
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 11:58:30 UTC from IEEE Xplore. Restrictions apply.
+
+

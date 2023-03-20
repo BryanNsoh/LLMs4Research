@@ -1,15 +1,18 @@
 import openai
 import process_research as research
 import datetime
+import os
+import sys
+
 
 # Set your OpenAI API key
 openai.api_key = "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"
 
-folder_path = "./research_files"
-pdf_filenames = research.get_pdf_filenames(folder_path)
+folder_name = "research_files"
+pdf_filenames = research.get_txt_filenames(folder_name)
 
 # Read and extract text from PDF research papers
-paper_contents = [research.read_pdf(pdf_filenames[index]) for index in range(0, len(pdf_filenames))]
+paper_contents = research.read_txts(pdf_filenames)
 
 research_output = research.process_papers(paper_contents)
 print(research_output)

@@ -1,0 +1,679 @@
+IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 57, NO. 7, JULY 2008
+
+1379
+
+Remote Sensing and Control of an Irrigation System
+Using a Distributed Wireless Sensor Network
+Yunseop (James) Kim, Member, IEEE, Robert G. Evans, and William M. Iversen
+
+Abstract—Efficient water management is a major concern in
+many cropping systems in semiarid and arid areas. Distributed
+in-field sensor-based irrigation systems offer a potential solution to
+support site-specific irrigation management that allows producers
+to maximize their productivity while saving water. This paper
+describes details of the design and instrumentation of variable rate
+irrigation, a wireless sensor network, and software for real-time
+in-field sensing and control of a site-specific precision linear-move
+irrigation system. Field conditions were site-specifically monitored
+by six in-field sensor stations distributed across the field based
+on a soil property map, and periodically sampled and wirelessly
+transmitted to a base station. An irrigation machine was converted
+to be electronically controlled by a programming logic controller
+that updates georeferenced location of sprinklers from a differential Global Positioning System (GPS) and wirelessly communicates
+with a computer at the base station. Communication signals from
+the sensor network and irrigation controller to the base station
+were successfully interfaced using low-cost Bluetooth wireless radio communication. Graphic user interface-based software developed in this paper offered stable remote access to field conditions
+and real-time control and monitoring of the variable-rate irrigation controller.
+Index Terms—Automation, control systems, measurement,
+portable radio communication, sensors, water resources.
+
+I. I NTRODUCTION
+
+I
+
+RRIGATION is an essential practice in many agricultural
+cropping systems in semiarid and arid areas, and efficient water applications and management are major concerns.
+Self-propelled center pivot and linear-move irrigation systems
+generally apply water quite uniformly; however, substantial
+variations in soil properties and water availability exist across
+most fields. In these cases, the ability to apply site-specific irrigation management to match spatially and temporally variable
+conditions can increase application efficiencies, reduce environmental impacts, and even improve yields. The development
+of a distributed in-field sensor-based site-specific irrigation
+system offers the potential to increase yield and quality while
+saving water, but the seamless integration of sensor fusion,
+irrigation control, data interface, software design, and communication can be challenging.
+Several other researchers have investigated the potential use
+of feedback from wireless in-field sensing systems to control
+Manuscript received March 14, 2007; revised July 11, 2007. This work was
+supported in part by the U.S. Department of Agriculture.
+The authors are with the U.S. Department of Agriculture-Agricultural
+Research Service, Northern Plains Agricultural Research Laboratory, Sidney,
+MT 59270 USA (e-mail: jkim@sidney.ars.usda.gov).
+Color versions of one or more of the figures in this paper are available online
+at http://ieeexplore.ieee.org.
+Digital Object Identifier 10.1109/TIM.2008.917198
+
+variable-rate irrigation systems, but few have fully integrated
+these systems. Miranda et al. [1] used a closed-loop irrigation
+system and determined irrigation amount based on distributed
+soil water measurements. Shock et al. [2] used radio transmission for soil moisture data from data loggers to a central
+computer logging site. Wall and King [3] explored designs for
+smart soil moisture sensors and sprinkler valve controllers to
+implement plug-and-play technology and proposed architectures of distributed sensor networks for site-specific irrigation
+automation. Perry et al. [4] compared the uniformity of sprinkler irrigation with and without sprinkler cycling on and off,
+and indicated that sprinklers cycling for variable-rate water
+applications had no effect on uniformity. Software design for
+automated irrigation control has been studied by Abreu and
+Pereira [5], who designed and simulated set sprinkler irrigation
+systems by using computer-aided design software that allowed
+the design of a simplified layout of the irrigation system.
+The coordination of control and instrumentation data is
+most effectively managed using data networks and low-cost
+microcontrollers [3]. Adopting a standard interface for sensors
+and actuators allows reuse of common hardware and communication protocol such as communication interface and control
+algorithm software. Instrumentation and control standards for
+RS-232 serial (voltage based) and RS-485 (current based)
+communication protocols have been widely applied and well
+documented for integrating sensors and actuators, particularly
+in industrial applications.
+A hard-wired system from in-field sensing stations to a base
+station takes extensive time and costs to install and maintain.
+It may not be feasible to hard wire the system for long distances, and it may not be acceptable to growers because it
+can interfere with normal farming operations. A wireless data
+communication system can provide dynamic mobility and costfree relocation. Radio frequency (RF) technology has been
+widely adopted in consumer wireless communication products,
+and it provides numerous opportunities to use wireless signal
+communication in agricultural systems.
+Bluetooth wireless technology is an example that has been
+adapted and used for sensing and control of agricultural systems [6]–[8]. Zhang [7] evaluated Bluetooth radio for different
+agricultural environments, power consumption, and data transmission rates. Zhang [7] observed 1.4 m as an optimal radio
+height for a maximum 44-m radio range and reported limitations of significant signal loss after 8 h of continuous battery
+operation and 2–3 s of transmission latency with the increase
+of communication range. Oksanen et al. [6] used a personal
+digital assistant equipped with Bluetooth to connect a Global
+Positioning System (GPS) receiver for their open, generic, and
+
+0018-9456/$25.00 © 2008 IEEE
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+1380
+
+IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 57, NO. 7, JULY 2008
+
+Fig. 1. Conceptual system layout of in-field wireless sensor network for site-specific irrigation.
+
+configurable automation platform for agricultural machinery.
+Lee et al. [8] explored an application of Bluetooth wireless data
+transmission of the moisture concentration of harvested silage
+and reported a limitation of a short 10-m range. However, the
+limitations reported by reviewed publications about Bluetooth
+applications in agricultural systems can be solved or minimized
+by a system design optimization. For example, power shortages
+can be solved by using solar panels that recharge the battery,
+and the radio range can also be improved by upgrading the
+power class and antennas.
+The development, testing, and use of an integrated distributed
+wireless sensor network (WSN) that utilizes Bluetooth technology are presented in this paper for sensor-based variable
+rate irrigation systems. The WSN eliminates the need to hard
+wire sensor stations across the field and reduces installation
+and maintenance costs. The WSN uses an ad hoc network,
+i.e., a mobile wireless network. Compared with a wireless
+local area network (WLAN), ad hoc networks have advantages
+for agricultural applications, because the mobility and selfconfiguration are more suitable for a distributed sensor network
+in fields [7]. The objective of this paper is to report the design,
+construction, and testing of a distributed in-field WSN, a remote
+sprinkler head valve control, and user-friendly software for realtime in-field sensing and control of a variable rate irrigation
+system.
+II. M ATERIALS AND M ETHODS
+A conceptual system layout of distributed in-field WSN is
+illustrated in Fig. 1. The system consists of five in-field sensing
+stations distributed across the field, an irrigation control station,
+and a base station. The in-field sensing stations monitor the field
+conditions of soil moisture, soil temperature, and air tempera-
+
+ture, whereas a nearby weather station monitors micrometeorological information on the field, i.e., air temperature, relative
+humidity, precipitation, wind speed, wind direction, and solar
+radiation. All in-field sensory data are wirelessly transmitted
+to the base station. The base station processes the in-field
+sensory data through a user-friendly decision making program
+and sends control commands to the irrigation control station.
+The irrigation control station updates and sends georeferenced
+locations of the machine from a differential GPS mounted at the
+cart to the base station for real-time monitoring and control of
+the irrigation system. Based on sprinkler head GPS locations,
+the base station feeds control signals back to the irrigation
+control station to site-specifically operate individual sprinkler
+to apply a specified depth of water.
+A. Site-Speciﬁc Field Conﬁguration
+The spatial variability of agricultural fields has been widely
+addressed in precision agriculture [10], [11]; however, optimizing field configurations for site-specific management in each
+field remains a difficult task. The spatial variation of the study
+site was examined in this paper so that a minimum number of
+in-field sensor systems could be placed with optimal impact
+for characterizing the scope of the field information. In this
+case, the optimal distribution of the in-field sensing stations was
+determined on the basis of the spatial soil variability [12].
+Soil properties such as a water-holding capacity can have
+a major impact on crop yield [13]. Apparent soil electrical
+conductivity (ECa ) was used to map the field for its variability,
+primarily as an indicator of water-holding capacity as well
+as salinity. ECa mapping has been widely used as one way
+to characterize variability of agricultural fields [13]–[15]. The
+ECa is a measure of the amount of salt in soil, which is directly
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+KIM et al.: REMOTE SENSING AND CONTROL OF AN IRRIGATION SYSTEM USING A DISTRIBUTED WSN
+
+related to the water-holding capacity, and other soil properties
+such as the percentage of sand, clay, and organic matter.
+B. In-Field Sensing Stations
+The system components of the in-field sensing stations
+and weather station contained three main parts: data logging,
+wireless data communication, and power management. A data
+logger measured field sensors and was self-powered by a solar
+panel (SX5, Solarex, Sacramento, CA) that recharged a sealed
+lead acid 12-V battery (NP7-12, Yuasa Battery Inc., Laureldale,
+PA) through a voltage regulator (SunSaver-6, Morningstar
+Corporation, Washington Crossing, PA). The sensory data were
+transmitted via a Bluetooth radio transmitter that is later described in detail.
+1) Data Logging: Field data were logged by a data logger
+(CR10, Campbell Scientific Inc., Logan, UT) for five in-field
+sensing stations and one weather station. A peripheral interface was implemented with a nine-pin D-type connector that
+was converted to a serial communication through an optically
+isolated RS-232 interface adapter (SC32B, Campbell Scientific
+Inc.). All six data loggers used in this paper were programmed
+to read data at the same time and configured at 10 s for scanning
+and 15 min for the data storage and download.
+Two water content reflectometers (CS616, Campbell
+Scientific Inc.) were horizontally installed at 30- and 60-cm soil
+depth to measure the volumetric water content of soil. Soil temperature is a useful information to determine how temperature
+affects the soil water-holding capacity. A temperature probe
+(107, Campbell Scientific Inc.) measured soil temperature at
+the 30-cm depth and was also used for air-temperature measurement at the 60-cm height with a solar radiation shield. A humidity probe (HMP35C, Vaisala, Helsinki, Finland) was mounted
+with a solar radiation shield to measure relative humidity. A
+pyranometer (LI200X, Licor, Lincoln, NE) was horizontally
+leveled and provided measures of solar radiation as total flux
+and flux density.
+2) Wireless Data Communication: Most wireless communications follow standard protocols such as the IEEE 802.11,
+Bluetooth, or Zigbee, which all use spread spectrum radio
+technology. Spectrum bands of 902–928 MHz, 2.4–2.48 GHz,
+and 5.7–5.85 GHz have been allocated for license-free spread
+spectrum devices [16]. The type of wireless standard in this
+paper was determined by the major factors of distance, data
+rate, compatibility, and cost. For the application in this paper,
+the field was located 700 m from the base station, and the
+data transfer rate required less than 1 kB per cycle in both
+transmitting and receiving due to a short text string of sensory data. Accommodating existing data loggers and sensors
+required plug-and-play compatibility to serial devices with
+cost-effective wireless communication modules. Based on all
+the requirements for our application, a Bluetooth module was
+selected for the wireless data communication from the in-field
+sensing stations to a base station.
+Bluetooth is an international standard of short-range wireless
+communications. The key features of Bluetooth technology
+are robustness, low power, and low cost. The Bluetooth radio
+transmission uses a slotted protocol with a Frequency Hopping
+
+1381
+
+Spread Spectrum technique in the globally available unlicensed
+2.4-GHz Industrial, Scientific, and Medical band. Each device
+is identified by a globally unique 48-bit address derived from
+the IEEE 802 standard [17]. Bluetooth’s 2.4-GHz hopping frequency system minimizes RF interference from sources such as
+a WLAN and maximizes user experience. Communication between Bluetooth devices follows a strict master–slave scheme,
+which is known as a piconet, in which the master defines the
+timing and the hopping patterns. A master device can simultaneously communicate with up to seven slave devices within a
+single piconet, and each device can also simultaneously belong
+to several piconets [18].
+A Bluetooth RS-232 serial adaptor (SD202, Initium Company, Sungnam, Korea) was used in this paper for wireless data
+communication. It was equipped with power class 1 with a
+power output of 63 mW (18 dBm) and a range of up to 1200 m
+with patch antennas. The adaptor was interfaced with a ninepin D-subfemale connector and an antenna port, and powered
+by 5–12 V with current draw of 40 mA at 9600 b/s Bd rate.
+3) Power Management: The efficient use of power is critical
+for a long-term operational system. Wireless sensor nodes are
+mostly powered by batteries and require efficient power management for both data scanning from sensors and for wireless
+data communication. Communication protocol is more helpful in reducing power consumption than in hardware optimization [19].
+Power consumption was estimated based on two modes:
+standby mode that draws power to maintain signal connection
+and active mode that draws more power to execute signal
+transmission. Based on a data logger that is running at a
+scanning interval of 10 s and Bluetooth radio transmission at a
+downloading interval of 15 min, daily total power consumption
+was 23.8 Wh. The total power supply from a battery and
+solar panel was 84 and 20 Wh, respectively. This indicates
+that the proposed power system will operate for 3.5 days
+if there is no sunlight. In fact, power dissipation was often
+observed due to rainy or cloudy days in our experiment during
+the first stage. When the Bluetooth device lost power slowly
+and the supply voltage dropped below 5 V, the communication link did not re-establish even after the battery was fully
+charged by solar radiation. This was caused by a manufacture’s
+hardware design limitation. The power system was redesigned
+by modifying Bluetooth power management, since the majority of power consumption was used by the Bluetooth standby mode.
+C. Irrigation Control Station
+1) Plot Design: The wireless variable rate irrigation control
+and monitoring was implemented on 3.6-ha experimental plots
+that were laid out in 14 strips in the direction of travel. Each
+strip was planted with either sugar beet or malting barley, which
+alternated from year to year. There are a total of 56 plots with
+the individual plot being 15 m wide and 24 m long, including
+buffers. Each strip was divided into four plots with two plots
+being irrigated with midelevation spray application (MESA)
+and two with low energy precision application (LEPA) that are
+blocked by replication [9].
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+1382
+
+IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 57, NO. 7, JULY 2008
+
+Fig. 2. Algorithm flowchart of PLC program with variable memory used in bits (V), bytes (VB), words (VW), and double words (VD).
+
+2) Linear-Move Irrigation System: A 295-m-long selfpropelled linear-move irrigation system (Valley, Valmont Irrigation, Valley, NE) was used for in-field sensor-based variable rate
+irrigation. It had six towers including the “cart” on one end, on
+which an industrial diesel engine was mounted and coupled to
+a water supply pump and an electrical generator (480 V, threephase) to provide power for the tower motors and cart motors.
+A buried wire alignment system was used with the antennas
+located in the middle of the machine. The water supply for the
+linear-move machine was a screened floating pump intake in
+a level ditch. Nominal operating pressure was about 250 kPa.
+Two double direction boom backs were installed at each of the
+towers. Spans were 49 m in length except for the center span
+with the guidance system that was a 47-m span. The machine
+moved at about 2 m/min at the 100% (fastest) setting. A control
+panel (Valley CAMS Pro, Valmont Irrigation) was used to turn
+the machine on or off, and to control machine ground speed.
+This self-propelled linear-move irrigation system has the
+capability to apply water using two different irrigation techniques [9]. MESA heads were spaced every 3 m with a spinner
+sprinkler (S3000, Nelson Irrigation Corporation, Walla Walla,
+WA) with 103-kPa regulators (#31 nozzles). These heads were
+about 1 m above the ground on flexible drops with 0.5-kg
+weights below each regulator. A different head (Quad-Spray,
+Senninger Irrigation, Inc., Clermont, FL) was used for a LEPA
+system with 69-kPa regulators (#10 nozzles) and sliding 1-kg
+weights above each regulator. The drops were spaced every
+1.2 m along submanifolds suspended from the truss rods and
+positioned at about 15 cm above the furrow surface. Water was
+applied on an alternate-row basis so that each pair of plant rows
+has a single LEPA nozzle between them. The LEPA heads were
+lifted above the crop when the MESA heads were operating so
+as to reduce water distribution interference.
+
+3) Positioning System: The georeferenced location of the
+sprinklers was obtained for real-time nozzle control and irrigation monitoring. A wide area augmentation system (WAAS)enabled differential GPS (17HVS, Garmin, Olathe, KS) was
+used to determine and track machine position as it moved
+across the plots. It was a compact GPS sensor that included an
+embedded 12-channel receiver and antenna and utilized WAAS
+corrections that yielded 3–5-m position accuracy [20]. However, the relatively slow travel speed of the machine allowed
+frequent averaging of GPS readings that increased accuracy to
+within 1 m. The GPS was mounted on top of the main cart
+and continuously updated georeferential information for the
+sprinklers as the irrigation cart moved across the field. The
+GPS readings were used to switch water application between
+the LEPA and MESA heads and to differentially apply water to
+the different crops or plots depending on treatments.
+4) Variable Rate Sprinkler Control: The linear irrigation
+system used in this paper utilized a basic control and valve
+system composed of off-the-shelf components. A programmable logic controller (PLC) (S7-226 with three relay expansion modules, Siemens, Johnson City, TN) activated electric
+over air solenoids (U8325B1V, ASCO, Florham Park, NJ) to
+control 30 banks of sprinklers. There were 15 banks of sideby-side MESA and LEPA treatments that cover the same areas.
+The electric solenoid, in turn, activated a pneumatic system to
+close normally open 1.9-cm plastic globe valves (Model 205,
+Bermad Inc., Anaheim, CA). In the case of the MESA heads,
+the valves were located on the gooseneck above each drop to
+each head in groups of five (15-m width). The air-activated
+valves were located on three goosenecks that supplied water
+to submanifolds for the LEPA heads in each 15-m section.
+The controlling electric solenoid valves were grouped into two
+clusters of six valves (three MESA and three LEPA) and placed
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+KIM et al.: REMOTE SENSING AND CONTROL OF AN IRRIGATION SYSTEM USING A DISTRIBUTED WSN
+
+in a weather-tight plastic enclosure on each cart. Normally open
+valves were used on the heads since the failure mode would
+leave the sprinklers on and allowed growers to still irrigate if
+the system went down.
+Air was used as the control fluid, since air is much cleaner
+than the irrigation water from surface supplies and prevents foreign material in the water supply from plugging the orifices in
+the sprinkler head control valves. A 0.7-kW three-phase 480-V
+air compressor was located at the motor/pump cart for easy
+maintenance with a 9.5-mm line running the length of machine.
+Small 12-L air reservoirs were located at each tower to ensure
+rapid and uniform valve operation.
+5) Software Design for PLC: The PLC was a micro-PLC
+equipped with a microprocessor and two RS-485 communication ports that were used for external communications through
+interface cables (RS-232/PPI, Siemens): one for GPS readings and the other for wireless data transmission to the base
+computer via the Bluetooth serial adaptor. A PLC software
+(STEP 7-Micro/WIN 32 ver. 3.2.2.11, Siemens) was used to
+create and download a program into the PLC via an RS-485
+communication port. A touch screen interface to the PLC was
+also located at the control point.
+A PLC program was created to read the GPS current location of the linear irrigation cart, compare it with premeasured
+boundary positions of the plots, and send control signals to
+solenoids to activate air valves. Fig. 2 illustrates the algorithm
+flowchart of the PLC program. Port 0 of the PLC was opened
+first to read 50 characters in the $GPGGA NMEA sentence
+streaming from the GPS starting from “A” through “M,” as
+underlined in the sample data line as follows:
+
+1383
+
+Fig. 3. Base station to communicate with both the sensing station and control
+station in the field.
+
+GPGGA, 180302, 4743.6219, N, 10409.0969,
+W, 2, 08, 1.1, 579.7, M, , , 1.2, 0000 ∗ 2A.
+
+(1)
+
+The GPS data were sent to the base computer via port 1 of the
+PLC, and sprinkler control signals were returned from the base
+computer that determined sprinklers on and off based on the
+updated GPS locations from the control station. The real-time
+control signals from the base computer overrode default values
+of sprinkler activation that were preprogrammed in the PLC.
+The last subroutine program in Fig. 2 was to assign variable
+memory to 30 output channels of the PLC.
+D. Base Station
+A base station was located about 700 m from the field and
+with trees partially blocking the line of sight. A Bluetooth
+radio patch antenna was mounted on the east side roof of a
+base station building and connected to a receiver (MSP-102a,
+Initium Company) beneath the roof via a 1-m extension cable,
+as shown in Fig. 3. The receiver was a multiserial Bluetooth
+server wired to a base computer via a 15-m crossed RJ45 cable.
+The Bluetooth receiver wirelessly received data from all
+sensing stations and sent the data to the base computer via
+Transmission Control Protocol (TCP)/Internet Protocol (IP)
+Ethernet. Nonlegacy serial applications made the use of the
+receiver without any modification to the application by using
+COM port redirector software (Serial/IP ver 4.3.7, Initium
+
+Fig. 4. Algorithm flowchart of WISC software.
+
+Company) that was a serial emulator to provide virtual COM
+ports and to redirect to TCP socket connection. All Bluetooth
+devices were paired with the receiver prior to in-field installation. The receiver was configured as a server mode in which the
+receiver operated as a TCP server on the network. Six Bluetooth
+devices used in this paper were registered into TCP data ports.
+1) Software Design for WISC: User-friendly software was
+developed for real-time control and monitoring of irrigation
+sprinklers based on graphical user interface. The software enabled the user to read the GPS data from the control station
+and sensor data from in-field sensing stations and send control
+signals to the irrigation control station for individual sprinkler
+operation. The wireless in-field sensing and control (WISC)
+software was coded by using Microsoft Visual C++.Net
+(ver. 7.1) as a console application type of Win32 project.
+The algorithm flowchart of the WISC program is shown in
+Fig. 4. The program first initialized a system by reading a
+configuration file and initializing parameters. A control panel
+dialog was handled by a function control subroutine that read
+input parameters and checked communication ports. A GPS
+mapping dialog followed to display irrigation plots, receive
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+1384
+
+IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 57, NO. 7, JULY 2008
+
+Fig. 5. Site-specific field configuration. (a) Soil profiler for electrical conductivity ECa . (b) In-field wireless sensor network topology based on soil ECa map.
+
+Fig. 6. Amplifier design diagram for a Bluetooth power switch triggered by a program in the data logger through a control port.
+
+GPS readings from the PLC, process the GPS and in-field
+sensor data for decision making to individual sprinklers, write
+control signals back to the PLC, and update plot display.
+III. E XPERIMENTS AND R ESULTS
+A. Site-Speciﬁc Field Conﬁguration
+As mentioned earlier, the apparent soil ECa was mapped
+by a soil profiler (3100, Veris Technologies, Salina, KS) with
+georeferenced points using a differential GPS (Ag132, Trimble,
+Sunnyvale, CA) on an experimental field [Fig. 5(a)]. Geostatistical analysis was performed by geographic information
+system software (ArcGIS ver. 9.1, ESRI, Redlands, CA) using
+a Kriging model to interpolate data and create spatial maps with
+five classifications by a quantile method. Fig. 5(b) shows the
+soil ECa variation from 38.2 to 128 mS/m with five different
+zones where each in-field sensing station was located.
+B. Power Management
+Power management for the wireless data communication was
+redesigned to change the standby mode to a sleep mode, which
+can save about 19 Wh/day out of a total of 23.8 Wh/day. To
+selectively turn the power on and off, a Bluetooth power cable
+was switched to a control port of the data logger. Since a
+
+signal at the control port was a digital transistor–transistor logic
+signal with high impedance, the signal had to be amplified to
+trigger a transistor. An inverted switch was designed by using
+an n-p-n bipolar Darlington transistor (NZT5073) to trigger the
+Bluetooth power, as shown in Fig. 6.
+A program was modified in data logger software to trigger
+control port 3. The control port was triggered to provide Bluetooth power for 2 min. The first minute was a wake-up signal
+to stabilize connectivity, whereas the second minute was assigned for data transmission. The radio signal connectivity was
+monitored by Bluetooth software (Promi-MSP, ver. 2.5, Initium
+Company). The power failure observed without the sleep mode
+was illustrated in Fig. 7 and solved by deploying the switch
+circuit for the sleep mode, resulting in stable cycle of power
+recharge shown at the right side of the dotted line in Fig. 7.
+C. Real-Time In-Field Monitoring
+An experiment was conducted on a small field at the
+Eastern Agricultural Research Center, Montana State University, Sidney, MT, during the winter of 2005. Five in-field
+sensing stations were installed based on the soil property map
+[Fig. 5(b)] and measured soil moisture and soil temperature.
+An in-field weather station was also mounted on the linear
+irrigation cart to monitor micrometeorological information: air
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+KIM et al.: REMOTE SENSING AND CONTROL OF AN IRRIGATION SYSTEM USING A DISTRIBUTED WSN
+
+Fig. 7.
+
+Power failure without sleep mode (left side of dotted line) and stable power recharging cycle with sleep mode (right side of dotted line).
+
+Fig. 8.
+
+Display of continuous monitoring of in-field sensing stations. The display updates every 15 min.
+
+temperature, relative humidity, precipitation, wind speed, wind
+direction, and solar radiation. This stand-alone weather station
+could also be located in a nearby field. The location of the
+Bluetooth radio antenna was modified from a 50-cm to a
+150-cm height to avoid radio signal interference due to crop
+canopies during the growing season. All in-field sensory data
+were scanned every 10 s, stored, and wirelessly transmitted
+to the base station every 15 min. The base station received
+
+1385
+
+the data and displayed field condition using software (RTMC
+Development ver. 2.0, Campbell Scientific Inc.). Fig. 8 shows
+a graphical data display of real-time monitoring of the in-field
+sensing stations.
+D. Real-Time Remote Monitoring and Control of Irrigation
+The real-time remote monitoring and control of the variable
+rate irrigation system was implemented by the WISC software.
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+1386
+
+IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 57, NO. 7, JULY 2008
+
+Fig. 9. Display of WISC software for real-time irrigation control and monitoring.
+
+The WISC software displayed two dialog screens: “Control
+Panel” and “Real-time GPS-based Irrigation Control and Monitoring”, as shown in Fig. 9. The “Control Panel” screen allowed
+local time conversion from GPS’s Greenwich mean time based
+on time zone and displayed the status and number for the
+communication port to the PLC. It also provided an option to
+synchronize the base computer time with the GPS for timesensitive operations and offered automatic data saving based on
+either GPS travel distance or time.
+The “Real-time GPS-based Irrigation Control and Monitoring” screen was activated from a “GPS Mapping” button
+in the “Control Panel” screen. It displayed GPS information
+wirelessly transmitted from the PLC and 30 sprinkler outputs
+to the PLC in 4 B and binary formats on top lines of the screen.
+The software allowed selecting plots to irrigate on menu buttons
+above the scaled plot display. The user control of individual
+sprinkler nozzle spans was also provided by selecting buttons
+on the list of spans after disabling a default mode of “Auto Nozzle Control”. Another default option “Toggle MESA/LEPA”
+was added to enable toggling MESA and LEPA when selecting
+either one, which prevented redundant irrigation on the same
+sites and ensured hydraulic power running through half of the
+sprinkler spans. All control selections made in the software
+were updated in real time and wirelessly transmitted to the PLC.
+Plots were scaled to display with boundary grids based on
+crops (sugar beet or barley), and each plot was colorized based
+on irrigation sprinkler types (light blue for MESA and light
+
+green for LEPA). The illustration in Fig. 9 is the real-time status
+of irrigation when only sugar beet plots were selected, as shown
+in menu buttons above the plot display, and thus all barley plots
+were whitened to indicate no irrigation. The current location of
+the linear irrigation cart was displayed in the red square along
+the top edge of the field, and MESA and LEPA plots that are
+irrigated were colored in dark blue and dark green, respectively.
+There was about a 1-s time lag in the response of the PLC from
+the base computer via Bluetooth wireless communication and
+an additional maximum 3-s delay in nozzle activation due to
+hydraulic power transition. These time delays were ignored,
+since the linear cart moved at a maximum of 3 cm/s.
+E. Cost of In-Field WSN
+There are many choices of WSN that depend on choices of
+range, data transmission rate, and cost. We explored how we
+could use off-the-shelf devices with a plug-and-play type of
+Bluetooth radio module. The total cost of Bluetooth wireless
+modules used in this paper for the in-field WSN was approximately $1000.
+IV. C ONCLUSION
+An automated closed-loop irrigation system requires three
+major components: machine conversion, navigation, and mission planning to support the solid communication protocol. This paper developed the machine conversion from a
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+KIM et al.: REMOTE SENSING AND CONTROL OF AN IRRIGATION SYSTEM USING A DISTRIBUTED WSN
+
+conventional irrigation system to an electronically controllable system for individual control of irrigation sprinklers and
+formulated the navigation of the irrigation system that was
+continuously monitored by a differential GPS and wirelessly
+transferred data to a base station for site-specific irrigation
+control. This paper also provided extensive details for the wireless communication interface of sensors from in-field sensor
+stations and for a programmable logic controller from a control
+station to the computer at a base station. Bluetooth wireless
+technology used in this paper offered a plug-and-play communication module and saved significant time and expense by
+using commercially available sensors and controllers equipped
+with serial communication ports. Stable wireless signal connectivity was achieved by power management circuit design and
+antennas at 1-m above the plant canopies. The development of
+WISC software provided real-time remote monitoring and control of variable rate irrigation, and continued decision making
+of mission planning for the automated closed-loop irrigation
+system. This paper proved a concept of a promising low-cost
+wireless solution for an in-field WSN and remote control of
+precision irrigation. Potential applications of Bluetooth wireless technology in agricultural systems can be extended to realtime field monitoring, automated irrigation control, and remote
+operation of field machinery.
+R EFERENCES
+[1] F. R. Miranda, R. Yoder, and J. B. Wilkerson, “A site-specific irrigation
+control system,” presented at the ASAE Annu. Int. Meeting, Las Vegas,
+NV, Jul. 27–30, 2003, Paper No. 031129.
+[2] C. C. Shock, R. J. David, C. A. Shock, and C. A. Kimberling, “Innovative,
+automatic, low-cost reading of Watermark soil moisture sensors,” in Proc.
+Irrig. Assoc. Tech. Conf., Falls Church, VA, 1999, pp. 147–152.
+[3] R. W. Wall and B. A. King, “Incorporating plug and play technology into
+measurement and control systems for irrigation management,” presented
+at the ASAE/CSAE Annu. Int. Meeting, Ottawa, ON, Canada, Aug. 1–4,
+2004, Paper No. 042189.
+[4] C. D. Perry, M. D. Dukes, and K. A. Harrison, “Effects of variable-rate
+sprinkler cycling on irrigation uniformity,” presented at the ASAE/CSAE
+Annu. Int. Meeting, Ottawa, ON, Canada, Aug. 1–4, 2004, Paper
+No. 041117.
+[5] V. M. Abreu and L. S. Pereira, “Sprinkler irrigation systems design using ISADim,” presented at the ASAE Annu. Int. Meeting, Chicago, IL,
+Jul. 27–31, 2002, Paper No. 022254.
+[6] T. Oksanen, M. Ohman, M. Miettinen, and A. Visala, “Open configurable control system for precision farming,” in Proc. ASAE Int. Conf.
+Autom. Technol. Off-Road Equipment, Kyoto, Japan, Aug. 1–4, 2004,
+pp. 184–191.
+[7] Z. Zhang, “Investigation of wireless sensor networks for precision agriculture,” presented at the ASAE/CSAE Annu. Int. Meeting, Ottawa, ON,
+Canada, Aug. 1–4, 2004, Paper No. 041154.
+[8] W. S. Lee, T. F. Burks, and J. K. Schueller, “Silage yield monitoring system,” presented at the ASAE Annu. Int. Meeting, Chicago, IL,
+Jul. 27–31, 2002, Paper No. 021165.
+[9] R. G. Evans and W. M. Iversen, “Combined LEPA and MESA irrigation on a site specific linear move system,” presented at the 26th Annu.
+Irrigation Association Int. Irrigation Show, Phoenix, AZ, Nov. 6–8, 2005,
+Paper IA05-1298.
+[10] A. Irmak, J. W. Jones, W. D. Batchelor, and J. O. Paz, “Linking multiple
+layers of information for attribution of causes of spatial yield variability
+in soybean,” Trans. ASAE, vol. 45, no. 3, pp. 839–849, 2002.
+[11] I. S. Ahmad, J. F. Reid, N. Noguchi, and A. C. Hansen, “Nitrogen sensing for precision agriculture using chlorophyll maps,” presented at the
+ASAE Annu. Int. Meeting, Toronto, ON, Canada, Jul. 18–22, 1999, Paper
+No. 993035.
+[12] Y. Kim, R. G. Evans, and J. D. Jabro, “Optimal site-specific configuration
+for wireless in-field sensor-based irrigation,” presented at the 26th Annu.
+Irrigation Association Int. Irrigation Show, Phoenix, AZ, Nov. 6–8, 2005,
+Paper IA05-1307.
+
+1387
+
+[13] H. J. Farahani and G. W. Buchleiter, “Temporal stability of soil electrical
+conductivity in irrigated sandy fields in Colorado,” Trans. ASAE, vol. 47,
+no. 1, pp. 79–90, 2004.
+[14] P. E. Drummond, C. D. Christy, and E. D. Lund, “Using an automated
+penetrometer and soil EC probe to characterize the rooting zone,” in Proc.
+5th Int. Conf. Precision Agriculture, Bloomington, MN, Jul. 16–19, 2000.
+[15] J. D. Jabro, R. G. Evans, Y. Kim, W. B. Stevens, and W. M. Iversen, “Characterization of spatial variability of soil electrical conductivity and cone
+index using coulter and penetrometer-type sensors,” Soil Sci., vol. 171,
+no. 8, pp. 627–637, 2006.
+[16] R. Kulkarni, Technologies for Building Wireless Industrial I/O Systems. Austin, TX: Nat. Instrum., May 3, 2005. [Online]. Available:
+http://www.ni.com/swf/presentation/us/wireless
+[17] T. Morris, Bluetooth technology living a cable-free lifestyle, May 3, 2005.
+[Online]. Available: http://www.ceetusm.com/~dkohn/cet316.html
+[18] Bluetooth, Bluetooth Basics, May 5, 2006, Bellevue, WA: Bluetooth
+Special Interest Group. [Online]. Available: http://www.bluetooth.com/
+Bluetooth/Learn/Basics
+[19] G. Pottie, “Wireless sensor networks,” in Proc. IEEE Int. Inf. Theory
+Workshop, Killarney, Ireland, Jun. 22–26, 1998, pp. 139–140.
+[20] GPS 16/17 Series Technical Speciﬁcations, Garmin Int., Inc., Olathe, KS,
+2002. rev. B.
+
+Yunseop (James) Kim (M’03) received the M.S.
+degree in bioresource engineering from Rutgers University, New Brunswick, NJ, in 1999 and the Ph.D.
+degree in agricultural engineering from the University of Illinois, Urbana, in 2002. His thesis research
+focused on the development of a multispectral imaging sensor for plant nitrogen assessment.
+In 2002, he joined Deere & Company, where he
+continued working on plant optical sensing for sitespecific crop management. He was also involved
+in system integration of autonomous navigation to
+develop unmanned ground vehicles. In 2005, he joined the U.S. Department
+of Agriculture-Agricultural Research Service, Northern Plains Agricultural
+Research Laboratory, Sidney, MT, and began an effort to build a wireless
+sensor-based irrigation system using an integrated wireless sensor network for
+automated site-specific real-time irrigation scheduling.
+
+Robert G. Evans received the Ph.D. degree from
+Colorado State University, Fort Collins, in 1981.
+He is an Agricultural Engineer and a Research
+Leader with the U.S. Department of AgricultureAgricultural Research Service, Northern Plains Agricultural Research Laboratory, Sidney, MT, where he
+is working on irrigated and dryland cropping systems. He was a faculty member at Washington State
+University, Pullman, for 20 years before accepting
+his current position in 2001. He is an internationally
+recognized authority in water management research.
+He has made major contributions to the areas of crop-specific water management, plant environmental modifications with irrigation, arid-region irrigation
+and nutrient management, and site-specific irrigation.
+
+William M. Iversen received the B.T. degree in electronics and the B.S. degree in vocational-technical
+education from Montana State University-Northern,
+Havre, in 1975.
+In 1976, he received a Northwest College and
+University Association for Science Application Engineering Appointment in Richland, WA. From 1976
+to 1978, he taught electronics at the University of
+South Dakota, Springfield, before electing to farm
+full time. He has owned and operated an irrigated and
+dryland farm since 1978. From 1992 to 2002, he was
+with the U.S. Department of Agriculture-Agricultural Research Service (ARS),
+Northern Plains Agricultural Research Laboratory, Sidney, MT, as a Computer
+Assistant and a Physical Science Technician, integrating remote sensing, GIS,
+and yield monitors in a precision agriculture program. In 2002, he joined the
+ARS as a Physical Scientist to assist in the irrigation and sugar beet strip tillage
+projects.
+
+Authorized licensed use limited to: University of Nebraska - Lincoln. Downloaded on March 20,2023 at 01:54:12 UTC from IEEE Xplore. Restrictions apply.
+
+
