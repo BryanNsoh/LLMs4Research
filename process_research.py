@@ -48,6 +48,10 @@ Question 2: Produce bullet points that capture the main arguments and insights o
 
 Answer: """
 
+        chunk_length = len(chunk_size)
+        prompt_len = len(prompt)
+        max_tokens = 4096 - len(prompt)
+
         response = openai.Completion.create(
             engine="text-curie-001",
             prompt=prompt,
