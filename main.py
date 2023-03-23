@@ -6,7 +6,7 @@ import sys
 
 
 # Set your OpenAI API key
-openai.api_key = "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"
+openai.api_key = "Insert Open-AI Key"
 
 folder_name = "research_files"
 pdf_filenames = research.get_txt_filenames(folder_name)
